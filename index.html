@@ -730,23 +730,7 @@
             document.getElementById('lightbox-modal').classList.remove('flex');
         }
 
-        function loadWishes() {
-            const container = document.getElementById('wishes-container');
-            const wishes = JSON.parse(localStorage.getItem('wedding_wishes') || '[]');
-            if (wishes.length === 0) {
-                container.innerHTML = `<p class="text-center text-xs text-gray-400 py-3">មិនទាន់មានសារជូនពរនៅឡើយទេ</p>`;
-                return;
-            }
-            container.innerHTML = wishes.map(w => `
-                <div class="bg-stone-50 p-3 rounded-lg border border-khmer-gold/20 shadow-sm">
-                    <div class="flex items-center justify-between mb-1">
-                        <span class="font-bold text-xs text-deep-maroon">${escapeHtml(w.name)}</span>
-                        <span class="text-[9px] text-gray-400">${w.date}</span>
-                    </div>
-                    <p class="text-xs text-gray-700 leading-relaxed">${escapeHtml(w.message)}</p>
-                </div>
-            `).join('');
-        }
+      
 
         function submitWish1(e) {
             e.preventDefault();
@@ -757,7 +741,7 @@
             localStorage.setItem('wedding_wishes', JSON.stringify(wishes));
             nameInput.value = '';
             msgInput.value = '';
-            loadWishes();
+
         }
 		async function submitWish(e) {
 			e.preventDefault();
@@ -803,7 +787,7 @@
             return text.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m]));
         }
 
-        loadWishes();
+        
     </script>
 </body>
 </html>
