@@ -1,793 +1,524 @@
 <!DOCTYPE html>
 <html lang="km" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>សិរីសួស្តី អាពាហ៍ពិពាហ៍ | San Bunseang &amp; Then Bunnet</title>
-    
-    <!-- Google Fonts for Khmer & English Typography -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&family=Great+Vibes&family=Moul&family=Nokora:wght@400;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'royal-crimson': '#6A0012',
-                        'deep-maroon': '#800020',
-                        'dark-maroon': '#4A000E',
-                        'khmer-gold': '#D4AF37',
-                        'khmer-gold-light': '#F3E5AB',
-                        'khmer-gold-dark': '#AA820A',
-                        'cream-bg': '#FFFDF8',
-                        'sand-card': '#FAF7F2',
-                    },
-                    fontFamily: {
-                        moul: ['Moul', 'serif'],
-                        nokora: ['Nokora', 'sans-serif'],
-                        battambang: ['Battambang', 'sans-serif'],
-                        playfair: ['Playfair Display', 'serif'],
-                        script: ['Great Vibes', 'cursive']
-                    }
-                }
-            }
-        }
-    </script>
-    
-    <style>
-        body {
-            background-color: #FFFDF8;
-            background-image: radial-gradient(#D4AF37 0.75px, transparent 0.75px), radial-gradient(#D4AF37 0.75px, #FFFDF8 0.75px);
-            background-size: 30px 30px;
-            background-position: 0 0, 15px 15px;
-            font-family: 'Nokora', sans-serif;
-            color: #333333;
-            overflow-x: hidden;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>សិរីសួស្តី អាពាហ៍ពិពាហ៍ | San Bunseang &amp; Then Bunnet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&family=Great+Vibes&family=Moul&family=Nokora:wght@400;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = { theme: { extend: {
+  colors: { 
+    // Style 1: Royal Crimson & Gold
+    'deep-maroon':'#800020','dark-maroon':'#4A000E','khmer-gold':'#D4AF37','khmer-gold-light':'#F3E5AB','khmer-gold-dark':'#AA820A','cream-bg':'#FFFDF8','sand-card':'#FAF7F2',
+    // Style 2: Rose Champagne
+    'rose-primary':'#7C3F4C','rose-dark':'#441E25','rose-gold':'#E5C158','rose-bg':'#FFF9FA',
+    // Style 3: Midnight Navy & Platinum
+    'navy-primary':'#0F1E36','navy-dark':'#080E1C','navy-gold':'#D4AF37','navy-bg':'#F5F7FA'
+  },
+  fontFamily: { moul:['Moul','serif'], nokora:['Nokora','sans-serif'], battambang:['Battambang','sans-serif'], playfair:['Playfair Display','serif'], script:['Great Vibes','cursive'] }
+}}}
+</script>
 
-        @keyframes shimmer {
-            0% { background-position: -200% 0; }
-            100% { background-position: 200% 0; }
-        }
+<style>
+  body { background-color:#3a0009; font-family:'Nokora',sans-serif; color:#333; overflow-x:hidden; transition: background-color 0.5s ease; }
+  body.theme-rose { background-color:#3d1a20; }
+  body.theme-navy { background-color:#0b1322; }
+  
+  @keyframes shimmer { 0% { background-position:-200% 0; } 100% { background-position:200% 0; } }
+  .spinning { animation: spin 6s linear infinite; }
+  @keyframes spin { 100% { transform:rotate(360deg); } }
+  .kbach-corner-tl { top:-6px; left:-6px; }
+  .kbach-corner-tr { top:-6px; right:-6px; transform:rotate(90deg); }
+  .kbach-corner-br { bottom:-6px; right:-6px; transform:rotate(180deg); }
+  .kbach-corner-bl { bottom:-6px; left:-6px; transform:rotate(270deg); }
+  @keyframes fadeInUp { from { opacity:0; transform:translate(-50%,20px); } to { opacity:1; transform:translate(-50%,0); } }
+  .toast-animate { animation: fadeInUp .3s cubic-bezier(.175,.885,.32,1.275) forwards; }
 
-        .shimmer-btn {
-            background: linear-gradient(90deg, #800020 0%, #B38728 50%, #800020 100%);
-            background-size: 200% 100%;
-            animation: shimmer 4s infinite;
-        }
+  /* ===== Animated photo background ===== */
+  #photo-bg { position:fixed; inset:0; z-index:0; overflow:hidden; background:#3a0009; transition: background 0.5s ease; }
+  body.theme-rose #photo-bg { background:#3d1a20; }
+  body.theme-navy #photo-bg { background:#0b1322; }
 
-        .particle {
-            position: fixed;
-            pointer-events: none;
-            opacity: 0.6;
-            z-index: 1;
-            animation: float 12s infinite linear;
-        }
+  #photo-bg .slide { position:absolute; inset:-6%; background-size:cover; background-position:center top; opacity:0; will-change:transform,opacity;
+    animation: slideFade var(--cycle) ease-in-out infinite, slideDrift var(--cycle) ease-in-out infinite; animation-delay:var(--delay); }
+  @keyframes slideFade { 0% { opacity:0; } 8%,28% { opacity:1; } 38%,100% { opacity:0; } }
+  @keyframes slideDrift { 0% { transform:scale(1.02) translate3d(0,0,0); } 40%,100% { transform:scale(1.14) translate3d(-2%,-1.5%,0); } }
+  #photo-bg::after { content:""; position:absolute; inset:0; pointer-events:none;
+    background: radial-gradient(ellipse at 50% 0%, rgba(212,175,55,.28), transparent 55%), linear-gradient(180deg, rgba(74,0,14,.55), rgba(58,0,9,.72)); }
+  
+  main > div.bg-cream-bg { background-color:rgba(255,253,248,.92) !important; -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px); transition: background-color 0.5s ease; }
+  body.theme-rose main > div.bg-cream-bg { background-color:rgba(255,249,250,.95) !important; }
+  body.theme-navy main > div.bg-cream-bg { background-color:rgba(245,247,250,.95) !important; }
 
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-        }
+  /* ===== Gate: Split Image Door Animation ===== */
+  #envelope-modal { overflow:hidden; background-color: #1a0004; }
+  .door {
+    position: absolute; top: 0; bottom: 0; width: 50.2%; z-index: 2;
+    background-image: url('1.jpg'); background-size: 200% 100%;
+    transition: transform 1.6s cubic-bezier(0.77, 0, 0.18, 1);
+    box-shadow: inset 0 0 60px rgba(0,0,0,0.8);
+  }
+  .door-left { left: 0; background-position: left center; border-right: 2.5px solid #D4AF37; }
+  .door-right { right: 0; background-position: right center; border-left: 2.5px solid #D4AF37; }
+  .door::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(30, 0, 5, 0.75) 0%, rgba(45, 0, 8, 0.65) 50%, rgba(20, 0, 3, 0.85) 100%); }
+  .opening .door-left { transform: translateX(-102%); }
+  .opening .door-right { transform: translateX(102%); }
 
-        .spinning {
-            animation: spin 6s linear infinite;
-        }
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
-        }
+  .gate { position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 24px; color: #F3E5AB; }
+  .gate > * { transition: opacity 0.6s ease, transform 0.6s ease; }
+  .opening .gate { opacity: 0; transform: scale(1.05); pointer-events: none; }
 
-        .kbach-corner-tl { top: -6px; left: -6px; transform: rotate(0deg); }
-        .kbach-corner-tr { top: -6px; right: -6px; transform: rotate(90deg); }
-        .kbach-corner-br { bottom: -6px; right: -6px; transform: rotate(180deg); }
-        .kbach-corner-bl { bottom: -6px; left: -6px; transform: rotate(270deg); }
+  .gate-title { font-family: 'Moul', serif; font-size: 20px; color: #FFDF73; margin-top: 8px; text-shadow: 0 2px 8px rgba(0,0,0,0.9); }
+  .gate-subtitle { font-family: 'Great Vibes', cursive; font-size: 32px; color: #FFFDF8; margin: 2px 0 6px 0; }
+  .gate-names { font-size: 14px; font-weight: 700; color: #F3E5AB; background: rgba(40, 0, 8, 0.65); padding: 4px 18px; border-radius: 99px; border: 1px solid rgba(212,175,55,0.5); }
 
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translate(-50%, 20px); }
-            to { opacity: 1; transform: translate(-50%, 0); }
-        }
-        .toast-animate {
-            animation: fadeInUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-    </style>
+  .lotus { width: min(220px, 55vw); margin-bottom: 8px; animation: lotusFloat 4s ease-in-out infinite; filter: drop-shadow(0 0 18px rgba(212,175,55,0.8)); }
+  @keyframes lotusFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+  
+  .gate-btn { 
+    margin-top: 24px; padding: 14px 36px; border-radius: 999px; border: 1.5px solid #D4AF37; color: #FFFDF8; font-family: 'Moul', serif; font-size: 13px;
+    background: linear-gradient(90deg,#800020,#B38728,#800020); background-size: 200% 100%; animation: shimmer 4s infinite; cursor: pointer;
+  }
+
+  header h1 { 
+    background: linear-gradient(90deg,#800020 0%,#800020 35%,#D4AF37 50%,#800020 65%,#800020 100%); 
+    background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: titleShine 5s linear infinite;
+  }
+  @keyframes titleShine { from { background-position:150% 0; } to { background-position:-150% 0; } }
+
+  .hero-kb { animation:kenburns 18s ease-in-out infinite alternate; transform-origin:50% 20%; }
+  @keyframes kenburns { from { transform:scale(1); } to { transform:scale(1.12); } }
+  .hero-sweep::after { content:""; position:absolute; inset:0; pointer-events:none; background:linear-gradient(115deg,transparent 40%,rgba(243,229,171,.38) 50%,transparent 60%);
+    transform:translateX(-120%); animation:sweep 6s ease-in-out 2s infinite; }
+  @keyframes sweep { 0% { transform:translateX(-120%); } 35%,100% { transform:translateX(120%); } }
+
+  .rv    { opacity:0; transform:translateY(36px);  transition:opacity .9s ease, transform .9s cubic-bezier(.2,.8,.2,1); }
+  .rv-l { opacity:0; transform:translateX(-46px); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1); }
+  .rv-r { opacity:0; transform:translateX(46px);  transition:opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1); }
+  .rv-z { opacity:0; transform:scale(.85);        transition:opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1); }
+  .rv.in,.rv-l.in,.rv-r.in,.rv-z.in { opacity:1; transform:none; }
+  .tl-dot { transform:translateX(-50%) scale(0) !important; transition:transform .5s cubic-bezier(.3,1.8,.5,1); } .tl-dot.in { transform:translateX(-50%) scale(1) !important; }
+
+  .qr-glow { animation:qrGlow 3s ease-in-out infinite; }
+  @keyframes qrGlow { 0%,100% { box-shadow:0 0 0 0 rgba(212,175,55,0); } 50% { box-shadow:0 0 28px 6px rgba(212,175,55,.45); } }
+  .float-y { display:inline-block; animation:floatY 3s ease-in-out infinite; }
+  @keyframes floatY { 0%,100% { transform:translateY(0) rotate(-4deg); } 50% { transform:translateY(-8px) rotate(4deg); } }
+</style>
 </head>
+
 <body class="min-h-screen flex flex-col justify-between selection:bg-khmer-gold selection:text-deep-maroon">
 
-    <!-- Floating Background Particles -->
-    <div id="particles-container"></div>
+<div id="toast-banner" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden bg-deep-maroon text-khmer-gold-light border-2 border-khmer-gold px-5 py-2.5 rounded-full shadow-2xl text-xs font-bold flex items-center gap-2 toast-animate">
+  <i class="fa-solid fa-circle-check text-green-400 text-sm"></i><span id="toast-message">បានចម្លងលេខគណនី!</span>
+</div>
 
-    <!-- Toast Notification Banner -->
-    <div id="toast-banner" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 hidden bg-deep-maroon text-khmer-gold-light border-2 border-khmer-gold px-5 py-2.5 rounded-full shadow-2xl text-xs font-bold flex items-center gap-2 toast-animate">
-        <i class="fa-solid fa-circle-check text-green-400 text-sm"></i>
-        <span id="toast-message">បានចម្លងលេខគណនី!</span>
-    </div>
+<!-- GATE: Split Image Door Animation -->
+<div id="envelope-modal" class="fixed inset-0 z-50">
+  <div class="door door-left"></div>
+  <div class="door door-right"></div>
+  <div class="gate">
+    <svg class="lotus" viewBox="0 0 200 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M100 20C100 20 120 60 140 70C160 80 180 70 180 70C180 70 160 110 130 120C115 125 100 130 100 140C100 130 85 125 70 120C40 110 20 70 20 70C20 70 40 80 60 70C80 60 100 20 100 20Z" fill="#D4AF37" fill-opacity="0.95"/>
+      <path d="M100 40C100 40 112 70 125 80C138 90 155 85 155 85C155 85 140 115 115 120C105 122 100 125 100 135C100 125 95 122 85 120C60 115 45 85 45 85C45 85 62 90 75 80C88 70 100 40 100 40Z" fill="#F3E5AB"/>
+    </svg>
+    <h2 class="gate-title">សិរីសួស្តី អាពាហ៍ពិពាហ៍</h2>
+    <p class="gate-subtitle">Wedding E-Invitation</p>
+    <p class="gate-names">សាន ប៊ុនស៊ាង &amp; ថេន ប៊ុនណែត</p>
+    <button class="gate-btn" id="gate-open">បើកលិខិតអញ្ជើញ</button>
+  </div>
+</div>
 
-    <!-- OPENING ENVELOPE MODAL -->
-    <div id="envelope-modal" class="fixed inset-0 z-50 bg-dark-maroon flex items-center justify-center p-4 transition-all duration-700">
-        <div class="bg-sand-card w-full max-w-md rounded-2xl border-4 border-khmer-gold p-6 sm:p-8 text-center shadow-2xl relative overflow-hidden">
-            
-            <svg class="absolute kbach-corner-tl w-10 h-10 text-khmer-gold pointer-events-none" viewBox="0 0 100 100" fill="currentColor">
-                <path d="M0,0 L40,0 C30,10 20,25 20,40 C20,20 10,10 0,0 Z M0,0 L0,40 C10,30 25,20 40,20 C20,20 10,10 0,0 Z"/>
-            </svg>
-            <svg class="absolute kbach-corner-tr w-10 h-10 text-khmer-gold pointer-events-none" viewBox="0 0 100 100" fill="currentColor">
-                <path d="M0,0 L40,0 C30,10 20,25 20,40 C20,20 10,10 0,0 Z M0,0 L0,40 C10,30 25,20 40,20 C20,20 10,10 0,0 Z"/>
-            </svg>
+<!-- Floating Controls (Language, Music, Style Switcher) -->
+<div class="fixed top-4 right-4 z-40 flex items-center gap-2">
+  <button onclick="toggleTheme()" class="bg-deep-maroon/90 text-khmer-gold-light border border-khmer-gold px-2.5 py-1.5 rounded-full shadow-lg text-[11px] font-bold hover:bg-khmer-gold hover:text-deep-maroon transition-all flex items-center gap-1 backdrop-blur-md" title="Change Theme Style">
+    <i class="fa-solid fa-palette"></i><span id="theme-indicator">Style 1</span>
+  </button>
+  <button id="lang-btn" onclick="toggleLanguage()" class="bg-deep-maroon/90 text-khmer-gold-light border border-khmer-gold px-3 py-1.5 rounded-full shadow-lg text-xs font-bold hover:bg-khmer-gold hover:text-deep-maroon transition-all flex items-center gap-1.5 backdrop-blur-md">
+    <i class="fa-solid fa-globe"></i><span id="lang-indicator">EN</span>
+  </button>
+  <button id="music-btn" onclick="toggleAudio()" class="bg-deep-maroon/90 text-khmer-gold border border-khmer-gold w-9 h-9 rounded-full shadow-lg flex items-center justify-center hover:bg-khmer-gold hover:text-deep-maroon transition-all backdrop-blur-md relative">
+    <i id="music-icon" class="fa-solid fa-music text-xs"></i>
+    <span id="music-pulse" class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-green-500 rounded-full hidden"></span>
+  </button>
+</div>
 
-            <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-deep-maroon border-2 border-khmer-gold flex items-center justify-center shadow-lg transform hover:rotate-6 transition-transform">
-                <svg width="45" height="45" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M50 0C52 25 75 48 100 50C75 52 52 75 50 100C48 75 25 52 0 50C25 48 48 25 50 0Z" fill="#D4AF37"/>
-                    <circle cx="50" cy="50" r="10" fill="#800020"/>
-                </svg>
-            </div>
+<audio id="bg-audio" loop preload="auto"><source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg"></audio>
 
-            <h2 class="font-moul text-deep-maroon text-lg sm:text-xl mb-1">លិខិតអញ្ជើញអាពាហ៍ពិពាហ៍</h2>
-            <p class="font-script text-2xl text-khmer-gold-dark mb-2">Wedding E-Invitation</p>
-            
-            <p class="text-xs text-gray-600 mb-6 font-bold">សាន ប៊ុនស៊ាង &amp; ថេន ប៊ុនណែត</p>
+<main class="w-full max-w-xl mx-auto px-3 py-4 sm:py-8 relative z-10">
+<div class="bg-cream-bg rounded-2xl shadow-2xl border-4 border-khmer-gold p-4 sm:p-8 relative overflow-hidden">
 
-            <button onclick="openInvitation()" class="w-full shimmer-btn text-khmer-gold-light font-moul text-xs py-3.5 px-6 rounded-xl border border-khmer-gold shadow-lg hover:opacity-95 transition-all flex items-center justify-center gap-2">
-                <i class="fa-solid fa-envelope-open-text text-sm"></i>
-                <span data-km="បើកលិខិតអញ្ជើញ" data-en="Open Invitation">បើកលិខិតអញ្ជើញ</span>
-            </button>
+  <!-- kbach corners -->
+  <svg class="absolute kbach-corner-tl w-12 h-12 text-khmer-gold z-20 pointer-events-none" viewBox="0 0 100 100" fill="currentColor"><path d="M0,0 L40,0 C30,10 20,25 20,40 C20,20 10,10 0,0 Z M0,0 L0,40 C10,30 25,20 40,20 C20,20 10,10 0,0 Z"/><circle cx="15" cy="15" r="5"/></svg>
+  <svg class="absolute kbach-corner-tr w-12 h-12 text-khmer-gold z-20 pointer-events-none" viewBox="0 0 100 100" fill="currentColor"><path d="M0,0 L40,0 C30,10 20,25 20,40 C20,20 10,10 0,0 Z M0,0 L0,40 C10,30 25,20 40,20 C20,20 10,10 0,0 Z"/><circle cx="15" cy="15" r="5"/></svg>
+  <svg class="absolute kbach-corner-br w-12 h-12 text-khmer-gold z-20 pointer-events-none" viewBox="0 0 100 100" fill="currentColor"><path d="M0,0 L40,0 C30,10 20,25 20,40 C20,20 10,10 0,0 Z M0,0 L0,40 C10,30 25,20 40,20 C20,20 10,10 0,0 Z"/><circle cx="15" cy="15" r="5"/></svg>
+  <svg class="absolute kbach-corner-bl w-12 h-12 text-khmer-gold z-20 pointer-events-none" viewBox="0 0 100 100" fill="currentColor"><path d="M0,0 L40,0 C30,10 20,25 20,40 C20,20 10,10 0,0 Z M0,0 L0,40 C10,30 25,20 40,20 C20,20 10,10 0,0 Z"/><circle cx="15" cy="15" r="5"/></svg>
+
+  <div class="border-2 border-dashed border-khmer-gold/60 p-3 sm:p-6 rounded-xl relative">
+
+    <header class="text-center py-4">
+      <div class="flex items-center justify-center mb-3">
+        <svg width="70" height="28" viewBox="0 0 100 40" fill="none"><path d="M50 0C52 10 60 18 70 20C60 22 52 30 50 40C48 30 40 22 30 20C40 18 48 10 50 0Z" fill="#D4AF37"/><circle cx="50" cy="20" r="4" fill="#800020"/><path d="M5 20H30M70 20H95" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <h1 class="font-moul text-deep-maroon text-lg sm:text-2xl mb-1 pt-1 tracking-wide" data-km="សិរីសួស្តី អាពាហ៍ពិពាហ៍" data-en="ROYAL WEDDING INVITATION">សិរីសួស្តី អាពាហ៍ពិពាហ៍</h1>
+      <p class="font-script text-2xl sm:text-3xl text-khmer-gold-dark mb-3" data-km="លិខិតអញ្ជើញ" data-en="Wedding E-Invitation">លិខិតអញ្ជើញ</p>
+      <p class="text-xs sm:text-sm text-gray-800 leading-relaxed px-2 mt-2 font-medium" data-km="យើងខ្ញុំមានកិត្តិយសសូមគោរពអញ្ជើញ ឯកឧត្តម លោកជំទាវ លោក លោកស្រី អ្នកនាងកញ្ញា ចូលរួមជាអធិបតី និងជាភ្ញៀវកិត្តិយស ក្នុងពិធីរៀបអាពាហ៍ពិពាហ៍ កូនប្រុស កូនស្រី របស់យើងខ្ញុំ" data-en="We have the honor to cordially invite Distinguished Guests, Relatives and Friends to celebrate the Wedding Ceremony of our Beloved Children.">យើងខ្ញុំមានកិត្តិយសសូមគោរពអញ្ជើញ ឯកឧត្តម លោកជំទាវ លោក លោកស្រី អ្នកនាងកញ្ញា ចូលរួមជាអធិបតី និងជាភ្ញៀវកិត្តិយស ក្នុងពិធីរៀបអាពាហ៍ពិពាហ៍ កូនប្រុស កូនស្រី របស់យើងខ្ញុំ</p>
+    </header>
+
+    <!-- Hero -->
+    <div id="hero" class="my-5 rounded-xl overflow-hidden border-2 border-khmer-gold shadow-lg relative group cursor-pointer hero-sweep rv-z" onclick="openLightbox('1.jpg','San Bunseang & Then Bunnet')">
+      <img src="1.jpg" alt="Wedding Couple Featured Portrait" class="hero-kb w-full h-80 sm:h-96 object-cover object-top">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-4">
+        <div class="text-white text-center w-full">
+          <p class="font-moul text-sm sm:text-base text-khmer-gold drop-shadow-md">សាន ប៊ុនស៊ាង &amp; ថេន ប៊ុនណែត</p>
+          <p class="text-[11px] text-gray-200">ខេត្តកំពង់ចាម</p>
         </div>
+      </div>
     </div>
 
-    <!-- Floating Audio & Language Control Bar -->
-    <div class="fixed top-4 right-4 z-40 flex items-center gap-2.5">
-        <button id="lang-btn" onclick="toggleLanguage()" class="bg-deep-maroon/90 text-khmer-gold-light border border-khmer-gold px-3 py-1.5 rounded-full shadow-lg text-xs font-bold hover:bg-khmer-gold hover:text-deep-maroon transition-all flex items-center gap-1.5 backdrop-blur-md">
-            <i class="fa-solid fa-globe"></i>
-            <span id="lang-indicator">EN</span>
-        </button>
-
-        <button id="music-btn" onclick="toggleAudio()" class="bg-deep-maroon/90 text-khmer-gold border border-khmer-gold w-9 h-9 rounded-full shadow-lg flex items-center justify-center hover:bg-khmer-gold hover:text-deep-maroon transition-all backdrop-blur-md relative">
-            <i id="music-icon" class="fa-solid fa-music text-xs"></i>
-            <span id="music-pulse" class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-green-500 rounded-full hidden"></span>
-        </button>
-    </div>
-
-    <!-- Hidden Background Audio Player -->
-    <audio id="bg-audio" loop preload="auto">
-        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
-    </audio>
-
-    <!-- MAIN CONTAINER -->
-    <main class="w-full max-w-xl mx-auto px-3 py-4 sm:py-8 relative z-10">
-
-        <div class="bg-cream-bg rounded-2xl shadow-2xl border-4 border-khmer-gold p-4 sm:p-8 relative overflow-hidden">
-            
-            <svg class="absolute kbach-corner-tl w-12 h-12 text-khmer-gold z-20 pointer-events-none" viewBox="0 0 100 100" fill="currentColor">
-                <path d="M0,0 L40,0 C30,10 20,25 20,40 C20,20 10,10 0,0 Z M0,0 L0,40 C10,30 25,20 40,20 C20,20 10,10 0,0 Z"/>
-                <circle cx="15" cy="15" r="5"/>
-            </svg>
-            <svg class="absolute kbach-corner-tr w-12 h-12 text-khmer-gold z-20 pointer-events-none" viewBox="0 0 100 100" fill="currentColor">
-                <path d="M0,0 L40,0 C30,10 20,25 20,40 C20,20 10,10 0,0 Z M0,0 L0,40 C10,30 25,20 40,20 C20,20 10,10 0,0 Z"/>
-                <circle cx="15" cy="15" r="5"/>
-            </svg>
-            <svg class="absolute kbach-corner-br w-12 h-12 text-khmer-gold z-20 pointer-events-none" viewBox="0 0 100 100" fill="currentColor">
-                <path d="M0,0 L40,0 C30,10 20,25 20,40 C20,20 10,10 0,0 Z M0,0 L0,40 C10,30 25,20 40,20 C20,20 10,10 0,0 Z"/>
-                <circle cx="15" cy="15" r="5"/>
-            </svg>
-            <svg class="absolute kbach-corner-bl w-12 h-12 text-khmer-gold z-20 pointer-events-none" viewBox="0 0 100 100" fill="currentColor">
-                <path d="M0,0 L40,0 C30,10 20,25 20,40 C20,20 10,10 0,0 Z M0,0 L0,40 C10,30 25,20 40,20 C20,20 10,10 0,0 Z"/>
-                <circle cx="15" cy="15" r="5"/>
-            </svg>
-
-            <div class="border-2 border-dashed border-khmer-gold/60 p-3 sm:p-6 rounded-xl relative">
-
-                <!-- HEADER SECTION -->
-                <header class="text-center py-4">
-                    <div class="flex items-center justify-center mb-3">
-                        <svg width="70" height="28" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M50 0C52 10 60 18 70 20C60 22 52 30 50 40C48 30 40 22 30 20C40 18 48 10 50 0Z" fill="#D4AF37"/>
-                            <circle cx="50" cy="20" r="4" fill="#800020"/>
-                            <path d="M5 20H30M70 20H95" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-
-                    <h1 class="font-moul text-deep-maroon text-lg sm:text-2xl mb-1 tracking-wide" data-km="សិរីសួស្តី អាពាហ៍ពិពាហ៍" data-en="ROYAL WEDDING INVITATION">
-                        សិរីសួស្តី អាពាហ៍ពិពាហ៍
-                    </h1>
-                    <p class="font-script text-2xl sm:text-3xl text-khmer-gold-dark mb-3" data-km="លិខិតអញ្ជើញ" data-en="Wedding E-Invitation">
-                        លិខិតអញ្ជើញ
-                    </p>
-
-                    <p class="text-xs sm:text-sm text-gray-700 leading-relaxed px-2 mt-2" data-km="យើងខ្ញុំមានកិត្តិយសសូមគោរពអញ្ជើញ ឯកឧត្តម លោកជំទាវ លោក លោកស្រី អ្នកនាងកញ្ញា ចូលរួមជាអធិបតី និងជាភ្ញៀវកិត្តិយស ក្នុងពិធីរៀបអាពាហ៍ពិពាហ៍ កូនប្រុស កូនស្រី របស់យើងខ្ញុំ" data-en="We have the honor to cordially invite Distinguished Guests, Relatives and Friends to celebrate the Wedding Ceremony of our Beloved Children.">
-                        យើងខ្ញុំមានកិត្តិយសសូមគោរពអញ្ជើញ ឯកឧត្តម លោកជំទាវ លោក លោកស្រី អ្នកនាងកញ្ញា ចូលរួមជាអធិបតី និងជាភ្ញៀវកិត្តិយស ក្នុងពិធីរៀបអាពាហ៍ពិពាហ៍ កូនប្រុស កូនស្រី របស់យើងខ្ញុំ
-                    </p>
-                </header>
-
-                <!-- FEATURED TOP HERO IMAGE (1.jpg) -->
-                <div class="my-5 rounded-xl overflow-hidden border-2 border-khmer-gold shadow-lg relative group cursor-pointer" onclick="openLightbox('1.jpg', 'San Bunseang & Then Bunnet')">
-                    <img src="1.jpg" alt="Wedding Couple Featured Portrait" class="w-full h-80 sm:h-96 object-cover object-top group-hover:scale-105 transition-transform duration-700">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-4">
-                        <div class="text-white text-center w-full">
-                            <p class="font-moul text-sm sm:text-base text-khmer-gold">សាន ប៊ុនស៊ាង &amp; ថេន ប៊ុនណែត</p>
-                            <p class="text-[11px] text-gray-200">ខេត្តកំពង់ចាម</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- PARENTS & BRIDE/GROOM SECTION -->
-                <section class="my-6 bg-white p-4 rounded-xl border border-khmer-gold/40 text-center shadow-sm">
-                    <div class="grid grid-cols-2 gap-3 text-xs sm:text-sm border-b border-khmer-gold/30 pb-4">
-                        <div class="border-r border-khmer-gold/30 pr-2">
-                            <h4 class="font-moul text-deep-maroon text-[11px] sm:text-xs mb-2 leading-snug" data-km="លោកពុក អ្នកម្តាយ (ខាងប្រុស)" data-en="Groom's Parents">
-                                លោកពុក អ្នកម្តាយ (ខាងប្រុស)
-                            </h4>
-                            <p class="font-bold text-gray-800 mb-0.5">លោក <span class="text-deep-maroon font-moul text-xs">សឿន សាន</span></p>
-                            <p class="font-bold text-gray-800">លោកស្រី <span class="text-deep-maroon font-moul text-xs">ឡា គីម</span></p>
-                        </div>
-                        <div class="pl-2">
-                            <h4 class="font-moul text-deep-maroon text-[11px] sm:text-xs mb-2 leading-snug" data-km="អ្នកម្តាយ (ខាងស្រី)" data-en="Bride's Parent">
-                                អ្នកម្តាយ (ខាងស្រី)
-                            </h4>
-                            <p class="font-bold text-gray-800 mt-2">លោកស្រី <span class="text-deep-maroon font-moul text-xs">សេង គឹមយន់</span></p>
-                        </div>
-                    </div>
-
-                    <div class="pt-5 pb-2">
-                        <div class="inline-block border border-khmer-gold rounded-full px-4 py-1 bg-deep-maroon text-khmer-gold-light text-xs font-bold mb-3 shadow">
-                            <span data-km="កូនប្រុស & កូនស្រី" data-en="GROOM & BRIDE">កូនប្រុស &amp; កូនស្រី</span>
-                        </div>
-
-                        <div class="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 my-2">
-                            <div class="text-center">
-                                <span class="block text-xs text-gray-500 mb-0.5" data-km="កូនប្រុស" data-en="Groom">កូនប្រុស</span>
-                                <h3 class="font-moul text-lg sm:text-xl text-deep-maroon">សាន ប៊ុនស៊ាង</h3>
-                                <span class="font-script text-base text-khmer-gold-dark">San Bunseang</span>
-                            </div>
-
-                            <div class="w-9 h-9 rounded-full bg-khmer-gold/20 border border-khmer-gold flex items-center justify-center my-1">
-                                <span class="text-deep-maroon font-moul text-sm">&amp;</span>
-                            </div>
-
-                            <div class="text-center">
-                                <span class="block text-xs text-gray-500 mb-0.5" data-km="កូនស្រី" data-en="Bride">កូនស្រី</span>
-                                <h3 class="font-moul text-lg sm:text-xl text-deep-maroon">ថេន ប៊ុនណែត</h3>
-                                <span class="font-script text-base text-khmer-gold-dark">Then Bunnet</span>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- REAL-TIME COUNTDOWN TIMER -->
-                <section class="my-6 text-center bg-deep-maroon text-khmer-gold-light p-4 sm:p-5 rounded-2xl border-2 border-khmer-gold shadow-lg">
-                    <h3 class="font-moul text-xs sm:text-sm text-khmer-gold mb-3 flex items-center justify-center gap-2">
-                        <i class="fa-regular fa-clock"></i>
-                        <span data-km="រាប់ថយក្រោយឆ្ពោះទៅថ្ងៃមង្គលការ" data-en="COUNTDOWN TO OUR SPECIAL DAY">រាប់ថយក្រោយឆ្ពោះទៅថ្ងៃមង្គលការ</span>
-                    </h3>
-
-                    <div class="grid grid-cols-4 gap-2 sm:gap-3 text-center">
-                        <div class="bg-dark-maroon/80 border border-khmer-gold/40 rounded-xl p-2">
-                            <span id="days" class="font-bold text-lg sm:text-2xl block text-khmer-gold">00</span>
-                            <span class="text-[10px] sm:text-xs text-gray-300" data-km="ថ្ងៃ" data-en="Days">ថ្ងៃ</span>
-                        </div>
-                        <div class="bg-dark-maroon/80 border border-khmer-gold/40 rounded-xl p-2">
-                            <span id="hours" class="font-bold text-lg sm:text-2xl block text-khmer-gold">00</span>
-                            <span class="text-[10px] sm:text-xs text-gray-300" data-km="ម៉ោង" data-en="Hours">ម៉ោង</span>
-                        </div>
-                        <div class="bg-dark-maroon/80 border border-khmer-gold/40 rounded-xl p-2">
-                            <span id="minutes" class="font-bold text-lg sm:text-2xl block text-khmer-gold">00</span>
-                            <span class="text-[10px] sm:text-xs text-gray-300" data-km="នាទី" data-en="Mins">នាទី</span>
-                        </div>
-                        <div class="bg-dark-maroon/80 border border-khmer-gold/40 rounded-xl p-2">
-                            <span id="seconds" class="font-bold text-lg sm:text-2xl block text-khmer-gold">00</span>
-                            <span class="text-[10px] sm:text-xs text-gray-300" data-km="វិនាទី" data-en="Secs">វិនាទី</span>
-                        </div>
-                    </div>
-
-                    <p class="mt-3 text-xs text-khmer-gold-light border-t border-khmer-gold/30 pt-2.5">
-                        ថ្ងៃសៅរ៍ ទី១២ និងថ្ងៃអាទិត្យ ទី១៣ ខែធ្នូ ឆ្នាំ២០២៦
-                    </p>
-                </section>
-
-                <!-- WEDDING PROGRAM SCHEDULE TIMELINE (LEFT & RIGHT CARDS) -->
-                <section class="my-8">
-                    <div class="text-center mb-6">
-                        <h3 class="font-moul text-deep-maroon text-base">
-                            កម្មវិធីសិរីមង្គលអាពាហ៍ពិពាហ៍
-                        </h3>
-                        <div class="w-16 h-[2px] bg-khmer-gold mx-auto mt-1"></div>
-                    </div>
-
-                    <!-- កម្មវិធីទី១ -->
-                    <div class="mb-8">
-                        <div class="bg-deep-maroon text-khmer-gold text-center py-2 px-3 rounded-lg font-moul text-xs mb-6 shadow border border-khmer-gold">
-                            កម្មវិធីទី១៖ ថ្ងៃសៅរ៍ ទី១២ ខែធ្នូ ឆ្នាំ២០២៦
-                        </div>
-
-                        <div class="space-y-4 relative before:absolute before:inset-0 before:left-4 sm:before:left-1/2 before:w-0.5 before:bg-khmer-gold/40">
-                            <!-- 03:00 ល្ងាច -->
-                            <div class="relative flex items-start gap-3 sm:gap-0">
-                                <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-deep-maroon border-2 border-khmer-gold flex items-center justify-center text-khmer-gold text-xs shadow z-10">🏮</div>
-                                <div class="ml-10 sm:ml-0 sm:w-1/2 sm:pr-6 sm:text-right w-full">
-                                    <div class="bg-white p-3 rounded-xl border border-khmer-gold/30 shadow-sm">
-                                        <span class="inline-block px-2 py-0.5 bg-khmer-gold/20 text-deep-maroon rounded text-xs font-bold mb-1">០៣:០០ ល្ងាច</span>
-                                        <h4 class="font-moul text-xs text-deep-maroon">ពិធីសែនកុងស៊ី</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 04:00 ល្ងាច -->
-                            <div class="relative flex items-start gap-3 sm:gap-0">
-                                <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-deep-maroon border-2 border-khmer-gold flex items-center justify-center text-khmer-gold text-xs shadow z-10">📜</div>
-                                <div class="ml-10 sm:ml-0 sm:w-1/2 sm:left-1/2 sm:pl-6 sm:ml-auto w-full">
-                                    <div class="bg-white p-3 rounded-xl border border-khmer-gold/30 shadow-sm">
-                                        <span class="inline-block px-2 py-0.5 bg-khmer-gold/20 text-deep-maroon rounded text-xs font-bold mb-1">០៤:០០ ល្ងាច</span>
-                                        <h4 class="font-moul text-xs text-deep-maroon">ពិធីសូត្រមន្តចម្រើនព្រះបរិត្ត</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 05:00 ល្ងាច -->
-                            <div class="relative flex items-start gap-3 sm:gap-0">
-                                <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-deep-maroon border-2 border-khmer-gold flex items-center justify-center text-khmer-gold text-xs shadow z-10">🕯️</div>
-                                <div class="ml-10 sm:ml-0 sm:w-1/2 sm:pr-6 sm:text-right w-full">
-                                    <div class="bg-white p-3 rounded-xl border border-khmer-gold/30 shadow-sm">
-                                        <span class="inline-block px-2 py-0.5 bg-khmer-gold/20 text-deep-maroon rounded text-xs font-bold mb-1">០៥:០០ ល្ងាច</span>
-                                        <h4 class="font-moul text-xs text-deep-maroon">ពិធីជុំពរ និងវេន</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 06:30 ល្ងាច -->
-                            <div class="relative flex items-start gap-3 sm:gap-0">
-                                <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-deep-maroon border-2 border-khmer-gold flex items-center justify-center text-khmer-gold text-xs shadow z-10">🍽️</div>
-                                <div class="ml-10 sm:ml-0 sm:w-1/2 sm:left-1/2 sm:pl-6 sm:ml-auto w-full">
-                                    <div class="bg-white p-3 rounded-xl border border-khmer-gold/30 shadow-sm">
-                                        <span class="inline-block px-2 py-0.5 bg-khmer-gold/20 text-deep-maroon rounded text-xs font-bold mb-1">០៦:៣០ ល្ងាច</span>
-                                        <h4 class="font-moul text-xs text-deep-maroon">អញ្ជើញភ្ញៀវកិត្តិយសពិសារពេលល្ងាច</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- កម្មវិធីទី២ -->
-                    <div class="mt-8">
-                        <div class="bg-deep-maroon text-khmer-gold text-center py-2 px-3 rounded-lg font-moul text-xs mb-6 shadow border border-khmer-gold">
-                            កម្មវិធីទី២៖ ថ្ងៃអាទិត្យ ទី១៣ ខែធ្នូ ឆ្នាំ២០២៦
-                        </div>
-
-                        <div class="space-y-4 relative before:absolute before:inset-0 before:left-4 sm:before:left-1/2 before:w-0.5 before:bg-khmer-gold/40">
-                            <!-- 06:30 ព្រឹក -->
-                            <div class="relative flex items-start gap-3 sm:gap-0">
-                                <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-deep-maroon border-2 border-khmer-gold flex items-center justify-center text-khmer-gold text-xs shadow z-10">👥</div>
-                                <div class="ml-10 sm:ml-0 sm:w-1/2 sm:pr-6 sm:text-right w-full">
-                                    <div class="bg-white p-3 rounded-xl border border-khmer-gold/30 shadow-sm">
-                                        <span class="inline-block px-2 py-0.5 bg-khmer-gold/20 text-deep-maroon rounded text-xs font-bold mb-1">០៦:៣០ ព្រឹក</span>
-                                        <h4 class="font-moul text-xs text-deep-maroon">ជួបជុំភ្ញៀវកិត្តិយស ដើម្បីរៀបចំរៀបចំហែជំនូន</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 07:00 ព្រឹក -->
-                            <div class="relative flex items-start gap-3 sm:gap-0">
-                                <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-deep-maroon border-2 border-khmer-gold flex items-center justify-center text-khmer-gold text-xs shadow z-10">🎉</div>
-                                <div class="ml-10 sm:ml-0 sm:w-1/2 sm:left-1/2 sm:pl-6 sm:ml-auto w-full">
-                                    <div class="bg-white p-3 rounded-xl border border-khmer-gold/30 shadow-sm">
-                                        <span class="inline-block px-2 py-0.5 bg-khmer-gold/20 text-deep-maroon rounded text-xs font-bold mb-1">០៧:០០ ព្រឹក</span>
-                                        <h4 class="font-moul text-xs text-deep-maroon">ពិធីហែជំនូនកំណត់ចូលរោងជ័យ</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 07:30 ព្រឹក -->
-                            <div class="relative flex items-start gap-3 sm:gap-0">
-                                <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-deep-maroon border-2 border-khmer-gold flex items-center justify-center text-khmer-gold text-xs shadow z-10">🌿</div>
-                                <div class="ml-10 sm:ml-0 sm:w-1/2 sm:pr-6 sm:text-right w-full">
-                                    <div class="bg-white p-3 rounded-xl border border-khmer-gold/30 shadow-sm">
-                                        <span class="inline-block px-2 py-0.5 bg-khmer-gold/20 text-deep-maroon rounded text-xs font-bold mb-1">០៧:៣០ ព្រឹក</span>
-                                        <h4 class="font-moul text-xs text-deep-maroon">ពិធីមេបាជើងរោង សែនពែន រៀបចំផ្លែឈើ និងពិធីជប់លៀងពេលព្រឹក</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 08:00 ព្រឹក -->
-                            <div class="relative flex items-start gap-3 sm:gap-0">
-                                <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-deep-maroon border-2 border-khmer-gold flex items-center justify-center text-khmer-gold text-xs shadow z-10">💍</div>
-                                <div class="ml-10 sm:ml-0 sm:w-1/2 sm:left-1/2 sm:pl-6 sm:ml-auto w-full">
-                                    <div class="bg-white p-3 rounded-xl border border-khmer-gold/30 shadow-sm">
-                                        <span class="inline-block px-2 py-0.5 bg-khmer-gold/20 text-deep-maroon rounded text-xs font-bold mb-1">០៨:០០ ព្រឹក</span>
-                                        <h4 class="font-moul text-xs text-deep-maroon">ពិធីបំពាក់ចិញ្ចៀន</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 09:00 ព្រឹក -->
-                            <div class="relative flex items-start gap-3 sm:gap-0">
-                                <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-deep-maroon border-2 border-khmer-gold flex items-center justify-center text-khmer-gold text-xs shadow z-10">✂️</div>
-                                <div class="ml-10 sm:ml-0 sm:w-1/2 sm:pr-6 sm:text-right w-full">
-                                    <div class="bg-white p-3 rounded-xl border border-khmer-gold/30 shadow-sm">
-                                        <span class="inline-block px-2 py-0.5 bg-khmer-gold/20 text-deep-maroon rounded text-xs font-bold mb-1">០៩:០០ ព្រឹក</span>
-                                        <h4 class="font-moul text-xs text-deep-maroon">ពិធីកាត់សក់បង្កក់សិរី កូនប្រុស-កូនស្រី</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 11:00 ព្រឹក -->
-                            <div class="relative flex items-start gap-3 sm:gap-0">
-                                <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-deep-maroon border-2 border-khmer-gold flex items-center justify-center text-khmer-gold text-xs shadow z-10">🌸</div>
-                                <div class="ml-10 sm:ml-0 sm:w-1/2 sm:left-1/2 sm:pl-6 sm:ml-auto w-full">
-                                    <div class="bg-white p-3 rounded-xl border border-khmer-gold/30 shadow-sm">
-                                        <span class="inline-block px-2 py-0.5 bg-khmer-gold/20 text-deep-maroon rounded text-xs font-bold mb-1">១១:០០ ព្រឹក</span>
-                                        <h4 class="font-moul text-xs text-deep-maroon">ពិធីសំពះផ្ទឹមចងដៃ បង្វិលពពិល និងព្រះសង្ឃចម្រើនព្រះបរិត្ត/ស្រោចទឹក</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 12:00 ថ្ងៃត្រង់ -->
-                            <div class="relative flex items-start gap-3 sm:gap-0">
-                                <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-deep-maroon border-2 border-khmer-gold flex items-center justify-center text-khmer-gold text-xs shadow z-10">🍲</div>
-                                <div class="ml-10 sm:ml-0 sm:w-1/2 sm:pr-6 sm:text-right w-full">
-                                    <div class="bg-white p-3 rounded-xl border border-khmer-gold/30 shadow-sm">
-                                        <span class="inline-block px-2 py-0.5 bg-khmer-gold/20 text-deep-maroon rounded text-xs font-bold mb-1">១២:០០ ថ្ងៃត្រង់</span>
-                                        <h4 class="font-moul text-xs text-deep-maroon">អញ្ជើញភ្ញៀវកិត្តិយសពិសារថ្ងៃត្រង់ បញ្ចប់កិច្ចអាពាហ៍ពិពាហ៍</h4>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- 05:00 ល្ងាច -->
-                            <div class="relative flex items-start gap-3 sm:gap-0">
-                                <div class="absolute left-4 sm:left-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-deep-maroon border-2 border-khmer-gold flex items-center justify-center text-khmer-gold text-xs shadow z-10">🥂</div>
-                                <div class="ml-10 sm:ml-0 sm:w-1/2 sm:left-1/2 sm:pl-6 sm:ml-auto w-full">
-                                    <div class="bg-white p-3 rounded-xl border border-khmer-gold/30 shadow-sm">
-                                        <span class="inline-block px-2 py-0.5 bg-khmer-gold/20 text-deep-maroon rounded text-xs font-bold mb-1">០៥:០០ ល្ងាច</span>
-                                        <h4 class="font-moul text-xs text-deep-maroon">អញ្ជើញភ្ញៀវកិត្តិយសពិធីជប់លៀង នៅគេហដ្ឋានស្រី ដោយមេត្រីភាព</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- DIGITAL GIFT ENVELOPE / QR PAY -->
-                <section class="my-8">
-                    <div class="bg-gradient-to-b from-dark-maroon via-deep-maroon to-dark-maroon p-5 sm:p-6 rounded-2xl border-2 border-khmer-gold text-white shadow-xl relative overflow-hidden">
-                        
-                        <div class="text-center mb-5 relative z-10">
-                            <span class="text-3xl mb-1 inline-block">🧧</span>
-                            <h3 class="font-moul text-base sm:text-lg text-khmer-gold mb-1" data-km="កញ្ចប់ចំណងដៃឌីជីថល" data-en="DIGITAL GIFT ENVELOPE (QR PAY)">
-                                កញ្ចប់ចំណងដៃឌីជីថល
-                            </h3>
-                            <p class="text-xs text-khmer-gold-light/90 max-w-sm mx-auto" data-km="លោកអ្នកអាចផ្ញើពរជ័យ និងចំណងដៃតាមរយៈ ABA / Bakong KHQR ទទួលបានយ៉ាងងាយស្រួល" data-en="Send your warm blessings and wedding gifts directly via ABA / Bakong KHQR">
-                                លោកអ្នកអាចផ្ញើពរជ័យ និងចំណងដៃតាមរយៈ ABA / Bakong KHQR ទទួលបានយ៉ាងងាយស្រួល
-                            </p>
-                        </div>
-
-                        <div class="bg-sand-card text-gray-800 p-4 rounded-xl border-2 border-khmer-gold max-w-xs mx-auto text-center shadow-2xl relative z-10">
-                            <div class="flex items-center justify-between border-b border-khmer-gold/30 pb-2 mb-3">
-                                <span class="font-moul text-xs text-deep-maroon">ABA BANK</span>
-                                <span class="bg-red-600 text-white text-[9px] font-bold px-2 py-0.5 rounded">KHQR</span>
-                            </div>
-
-                            <div onclick="openQRModal()" class="cursor-pointer group relative bg-white p-2.5 rounded-lg border border-gray-200 inline-block mb-3 transition-transform transform hover:scale-105">
-                                <img src="QR.jpg" alt="ABA KHQR Code" class="w-44 h-44 mx-auto object-contain">
-                                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center text-white text-xs font-bold gap-1">
-                                    <i class="fa-solid fa-expand"></i>
-                                    <span data-km="ពង្រីក" data-en="Enlarge">ពង្រីក</span>
-                                </div>
-                            </div>
-
-                            <div class="text-center space-y-0.5 mb-3">
-                                <p class="text-[10px] text-gray-500 uppercase tracking-wider">Account Name</p>
-                                <p class="font-moul text-xs text-deep-maroon">SAN Bunseang / THEN BUNNET</p>
-                                <p class="text-[11px] font-bold text-gray-700">005 907 166 (USD)</p>
-                            </div>
-
-                            <button onclick="copyAccNumber()" class="w-full bg-deep-maroon hover:bg-dark-maroon text-khmer-gold border border-khmer-gold text-xs font-bold py-2 px-3 rounded-lg shadow transition-all flex items-center justify-center gap-2">
-                                <i class="fa-regular fa-copy"></i>
-                                <span id="copy-btn-label" data-km="ចម្លងលេខគណនី" data-en="Copy Account Number">ចម្លងលេខគណនី</span>
-                            </button>
-                        </div>
-
-                        <p class="text-[11px] text-center text-khmer-gold-light/80 italic mt-4" data-km="សូមអរគុណយ៉ាងជ្រាលជ្រៅសម្រាប់ទឹកចិត្ត និងពរជ័យដ៏ថ្លៃថ្លា!" data-en="Thank you very much for your blessings and generosity!">
-                            សូមអរគុណយ៉ាងជ្រាលជ្រៅសម្រាប់ទឹកចិត្ត និងពរជ័យដ៏ថ្លៃថ្លា!
-                        </p>
-                    </div>
-                </section>
-
-                <!-- PHOTO GALLERY GRID (1.jpg, 2.jpg, 3.JPG, 4.jpg) -->
-                <section class="my-8">
-                    <div class="text-center mb-6">
-                        <h3 class="font-moul text-deep-maroon text-base" data-km="រូបភាពកម្រងអនុស្សាវរីយ៍" data-en="OUR MEMORIES GALLERY">
-                            រូបភាពកម្រងអនុស្សាវរីយ៍
-                        </h3>
-                        <div class="w-16 h-[2px] bg-khmer-gold mx-auto mt-1"></div>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-2.5">
-                        <div onclick="openLightbox('5.jpg', 'Traditional Couple Portrait')" class="cursor-pointer group relative overflow-hidden rounded-xl border-2 border-khmer-gold/50 h-36 sm:h-44 bg-gray-200">
-                            <img src="1.jpg" alt="Gallery 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
-                                <i class="fa-solid fa-magnifying-glass-plus text-lg"></i>
-                            </div>
-                        </div>
-
-                        <div onclick="openLightbox('2.jpg', 'Angkor Wat Temple View')" class="cursor-pointer group relative overflow-hidden rounded-xl border-2 border-khmer-gold/50 h-36 sm:h-44 bg-gray-200">
-                            <img src="2.jpg" alt="Gallery 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
-                                <i class="fa-solid fa-magnifying-glass-plus text-lg"></i>
-                            </div>
-                        </div>
-
-                        <div onclick="openLightbox('3.JPG', 'Temple Architecture Portrait')" class="cursor-pointer group relative overflow-hidden rounded-xl border-2 border-khmer-gold/50 h-36 sm:h-44 bg-gray-200">
-                            <img src="3.JPG" alt="Gallery 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
-                                <i class="fa-solid fa-magnifying-glass-plus text-lg"></i>
-                            </div>
-                        </div>
-
-                        <div onclick="openLightbox('4.JPG', 'Window Archway Portrait')" class="cursor-pointer group relative overflow-hidden rounded-xl border-2 border-khmer-gold/50 h-36 sm:h-44 bg-gray-200">
-                            <img src="4.jpg" alt="Gallery 4" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            <div class="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
-                                <i class="fa-solid fa-magnifying-glass-plus text-lg"></i>
-                            </div>
-                        </div>
-						
-						
-                    </div>
-                </section>
-
-                <!-- GOOGLE MAPS & LOCATION -->
-                <section class="my-8">
-                    <div class="text-center mb-6">
-                        <h3 class="font-moul text-deep-maroon text-base" data-km="ទីតាំងកម្មវិធីមង្គលការ" data-en="WEDDING VENUE & LOCATION">
-                            ទីតាំងកម្មវិធីមង្គលការ
-                        </h3>
-                        <div class="w-16 h-[2px] bg-khmer-gold mx-auto mt-1"></div>
-                    </div>
-
-                    <div class="bg-white p-3 rounded-xl border border-khmer-gold/40 shadow-sm text-center space-y-3">
-						<div class="rounded-lg overflow-hidden border border-gray-200 h-48 relative">
-							<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31489.157833075253!2d105.40!3d12.32!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDE5JzEyLjAiTiAxMDXCsDI0JzAwLjAiRQ!5e0!3m2!1sen!2skh!4v1650000000000!5m2!1sen!2skh" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-						</div>
-
-                        <div>
-                            <h4 class="font-moul text-xs text-deep-maroon">ភូមិ បុសពោធ៍ ឃុំ មេសរជ្រៃ ស្រុក ស្ទឹងត្រង់ ខេត្ត កំពង់ចាម</h4>
-                        </div>
-
-                        <!-- User's Custom Google Maps Link -->
-                        <a href="https://maps.app.goo.gl/1qQLgDnd52sXxqia9?g_st=ic" target="_blank" class="inline-flex items-center justify-center gap-2 bg-deep-maroon hover:bg-dark-maroon text-khmer-gold-light border border-khmer-gold text-xs font-bold py-2.5 px-5 rounded-xl shadow transition-all w-full">
-                            <i class="fa-solid fa-map-location-dot"></i>
-                            <span data-km="បើកមើលក្នុង Google Maps" data-en="Open in Google Maps">បើកមើលក្នុង Google Maps</span>
-                        </a>
-                    </div>
-                </section>
-
-                <!-- INTERACTIVE GUESTBOOK WISHES -->
-                <section class="my-8 bg-white p-4 rounded-xl border border-khmer-gold/40 shadow-sm text-left">
-                    <div class="text-center mb-4">
-                        <h3 class="font-moul text-deep-maroon text-sm" data-km="សៀវភៅសារជូនពរ" data-en="GUESTBOOK WISHES">
-                            សៀវភៅសារជូនពរ
-                        </h3>
-                        <p class="text-[11px] text-gray-500 mt-0.5" data-km="សូមទុកសារជូនពរដ៏ថ្លៃថ្លារបស់លោកអ្នកនៅទីនេះ" data-en="Leave your warm wishes for the couple here">សូមទុកសារជូនពរដ៏ថ្លៃថ្លារបស់លោកអ្នកនៅទីនេះ</p>
-                    </div>
-
-                    <form id="guestbook-form" onsubmit="submitWish(event)" class="space-y-3 mb-5">
-                        <div>
-                            <label class="block text-[11px] font-bold text-gray-700 mb-1" data-km="ឈ្មោះរបស់អ្នក" data-en="Your Name">ឈ្មោះរបស់អ្នក</label>
-                            <input type="text" id="guest-name" required placeholder="ឧ. លោក & អ្នកស្រី ..." class="w-full text-xs p-2.5 rounded-lg border border-gray-300 focus:outline-none focus:border-khmer-gold">
-                        </div>
-                        <div>
-                            <label class="block text-[11px] font-bold text-gray-700 mb-1" data-km="សារជូនពរ" data-en="Your Blessing Message">សារជូនពរ</label>
-                            <textarea id="guest-message" required rows="2" placeholder="សូមជូនពរឱ្យ..." class="w-full text-xs p-2.5 rounded-lg border border-gray-300 focus:outline-none focus:border-khmer-gold"></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-deep-maroon hover:bg-dark-maroon text-khmer-gold border border-khmer-gold text-xs font-bold py-2.5 rounded-lg shadow transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-paper-plane"></i>
-                            <span data-km="ផ្ញើសារជូនពរ" data-en="Send Wish">ផ្ញើសារជូនពរ</span>
-                        </button>
-                    </form>
-
-                    <div id="wishes-container" class="space-y-2.5 max-h-56 overflow-y-auto pr-1"></div>
-                </section>
-
-                <!-- FOOTER -->
-                <footer class="text-center pt-6 border-t border-khmer-gold/40 mt-6">
-                    <div class="flex items-center justify-center mb-2">
-                        <svg width="40" height="16" viewBox="0 0 100 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M50 0C52 10 60 18 70 20C60 22 52 30 50 40C48 30 40 22 30 20C40 18 48 10 50 0Z" fill="#D4AF37"/>
-                        </svg>
-                    </div>
-                    <p class="font-moul text-xs text-deep-maroon" data-km="សូមអរគុណយ៉ាងជ្រាលជ្រៅ!" data-en="THANK YOU!">
-                        សូមអរគុណយ៉ាងជ្រាលជ្រៅ!
-                    </p>
-                    <p class="text-[10px] text-gray-500 mt-1">© 2026 San Bunseang &amp; Then Bunnet Wedding</p>
-                </footer>
-
-            </div>
+    <!-- Parents + couple -->
+    <section class="my-6 bg-white/90 p-4 rounded-xl border border-khmer-gold/40 text-center shadow-sm backdrop-blur-sm rv">
+      <div class="grid grid-cols-2 gap-3 text-xs sm:text-sm border-b border-khmer-gold/30 pb-4">
+        <div class="border-r border-khmer-gold/30 pr-2">
+          <h4 class="font-moul text-deep-maroon text-[11px] sm:text-xs mb-2 leading-snug" data-km="លោកពុក អ្នកម្តាយ (ខាងប្រុស)" data-en="Groom's Parents">លោកពុក អ្នកម្តាយ (ខាងប្រុស)</h4>
+          <p class="font-bold text-gray-800 mb-0.5">លោក <span class="text-deep-maroon font-moul text-xs">សឿន សាន</span></p>
+          <p class="font-bold text-gray-800">លោកស្រី <span class="text-deep-maroon font-moul text-xs">ឡា គីម</span></p>
         </div>
-    </main>
-
-    <!-- FULLSCREEN QR CODE MODAL -->
-    <div id="qr-modal" class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4 backdrop-blur-sm" onclick="closeQRModal()">
-        <div class="bg-white rounded-2xl p-5 max-w-xs w-full text-center relative shadow-2xl border-2 border-khmer-gold" onclick="event.stopPropagation()">
-            <button onclick="closeQRModal()" class="absolute top-3 right-3 w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-700 font-bold">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <h4 class="font-moul text-deep-maroon text-sm mb-3">ABA KHQR</h4>
-            <div class="bg-gray-50 p-3 rounded-xl border border-gray-200 inline-block mb-3">
-                <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=00020101021138540011abaakhppxxx0108001234560203USD5204599953038405802KH5911SANBunseang6010KAMPONGCHAM62070703ABA6304C4E1" alt="ABA KHQR Large" class="w-64 h-64 mx-auto object-contain">
-            </div>
-            <p class="font-moul text-xs text-deep-maroon">SAN Bunseang / THEN BUNNET</p>
-            <p class="text-xs text-gray-600 font-bold mt-1">000 123 456</p>
+        <div class="pl-2">
+          <h4 class="font-moul text-deep-maroon text-[11px] sm:text-xs mb-2 leading-snug" data-km="អ្នកម្តាយ (ខាងស្រី)" data-en="Bride's Parent">អ្នកម្តាយ (ខាងស្រី)</h4>
+          <p class="font-bold text-gray-800 mt-2">លោកស្រី <span class="text-deep-maroon font-moul text-xs">សេង គឹមយន់</span></p>
         </div>
-    </div>
-
-    <!-- LIGHTBOX PHOTO MODAL -->
-    <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-4 backdrop-blur-md" onclick="closeLightbox()">
-        <div class="relative max-w-2xl w-full text-center" onclick="event.stopPropagation()">
-            <button onclick="closeLightbox()" class="absolute -top-12 right-0 text-white text-2xl font-bold p-2 hover:text-khmer-gold">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <img id="lightbox-img" src="" alt="Zoomed Photo" class="max-h-[80vh] mx-auto rounded-xl border-2 border-khmer-gold shadow-2xl object-contain">
-            <p id="lightbox-caption" class="text-khmer-gold-light text-sm mt-3 font-moul"></p>
+      </div>
+      <div class="pt-5 pb-2">
+        <div class="inline-block border border-khmer-gold rounded-full px-4 py-1 bg-deep-maroon text-khmer-gold-light text-xs font-bold mb-3 shadow"><span data-km="កូនប្រុស & កូនស្រី" data-en="GROOM & BRIDE">កូនប្រុស &amp; កូនស្រី</span></div>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 my-2">
+          <div class="text-center">
+            <span class="block text-xs text-gray-500 mb-0.5" data-km="កូនប្រុស" data-en="Groom">កូនប្រុស</span>
+            <h3 class="font-moul text-lg sm:text-xl text-deep-maroon" data-km="សាន ប៊ុនស៊ាង" data-en="San Bunseang">សាន ប៊ុនស៊ាង</h3>
+            <span class="font-script text-base text-khmer-gold-dark">San Bunseang</span>
+          </div>
+          <div class="w-9 h-9 rounded-full bg-khmer-gold/20 border border-khmer-gold flex items-center justify-center my-1"><span class="text-deep-maroon font-moul text-sm">&amp;</span></div>
+          <div class="text-center">
+            <span class="block text-xs text-gray-500 mb-0.5" data-km="កូនស្រី" data-en="Bride">កូនស្រី</span>
+            <h3 class="font-moul text-lg sm:text-xl text-deep-maroon" data-km="ថេន ប៊ុនណែត" data-en="Then Bunnet">ថេន ប៊ុនណែត</h3>
+            <span class="font-script text-base text-khmer-gold-dark">Then Bunnet</span>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <!-- Countdown -->
+    <section class="my-6 text-center bg-deep-maroon text-khmer-gold-light p-4 sm:p-5 rounded-2xl border-2 border-khmer-gold shadow-lg rv">
+      <h3 class="font-moul text-xs sm:text-sm text-khmer-gold mb-3 flex items-center justify-center gap-2"><i class="fa-regular fa-clock"></i><span data-km="រាប់ថយក្រោយឆ្ពោះទៅថ្ងៃមង្គលការ" data-en="COUNTDOWN TO OUR SPECIAL DAY">រាប់ថយក្រោយឆ្ពោះទៅថ្ងៃមង្គលការ</span></h3>
+      <div class="grid grid-cols-4 gap-2 sm:gap-3 text-center">
+        <div class="bg-dark-maroon/80 border border-khmer-gold/40 rounded-xl p-2"><span id="days" class="font-bold text-lg sm:text-2xl block text-khmer-gold">00</span><span class="text-[10px] sm:text-xs text-gray-300" data-km="ថ្ងៃ" data-en="Days">ថ្ងៃ</span></div>
+        <div class="bg-dark-maroon/80 border border-khmer-gold/40 rounded-xl p-2"><span id="hours" class="font-bold text-lg sm:text-2xl block text-khmer-gold">00</span><span class="text-[10px] sm:text-xs text-gray-300" data-km="ម៉ោង" data-en="Hours">ម៉ោង</span></div>
+        <div class="bg-dark-maroon/80 border border-khmer-gold/40 rounded-xl p-2"><span id="minutes" class="font-bold text-lg sm:text-2xl block text-khmer-gold">00</span><span class="text-[10px] sm:text-xs text-gray-300" data-km="នាទី" data-en="Mins">នាទី</span></div>
+        <div class="bg-dark-maroon/80 border border-khmer-gold/40 rounded-xl p-2"><span id="seconds" class="font-bold text-lg sm:text-2xl block text-khmer-gold">00</span><span class="text-[10px] sm:text-xs text-gray-300" data-km="វិនាទី" data-en="Secs">វិនាទី</span></div>
+      </div>
+      <p class="mt-3 text-xs text-khmer-gold-light border-t border-khmer-gold/30 pt-2.5">ថ្ងៃសៅរ៍ ទី១២ និងថ្ងៃអាទិត្យ ទី១៣ ខែធ្នូ ឆ្នាំ២០២៦</p>
+    </section>
+
+    <!-- Program -->
+    <section class="my-8 rv">
+      <div class="text-center mb-6"><h3 class="font-moul text-deep-maroon text-base">កម្មវិធីសិរីមង្គលអាពាហ៍ពិពាហ៍</h3><div class="w-16 h-[2px] bg-khmer-gold mx-auto mt-1 draw"></div></div>
+      <div class="mb-8">
+        <div class="bg-deep-maroon text-khmer-gold text-center py-2 px-3 rounded-lg font-moul text-xs mb-6 shadow border border-khmer-gold">កម្មវិធីទី១៖ ថ្ងៃសៅរ៍ ទី១២ ខែធ្នូ ឆ្នាំ២០២៦</div>
+        <div id="tl-1" class="space-y-4 relative before:absolute before:inset-0 before:left-4 sm:before:left-1/2 before:w-0.5 before:bg-khmer-gold/40"></div>
+      </div>
+      <div class="mt-8">
+        <div class="bg-deep-maroon text-khmer-gold text-center py-2 px-3 rounded-lg font-moul text-xs mb-6 shadow border border-khmer-gold">កម្មវិធីទី២៖ ថ្ងៃអាទិត្យ ទី១៣ ខែធ្នូ ឆ្នាំ២០២៦</div>
+        <div id="tl-2" class="space-y-4 relative before:absolute before:inset-0 before:left-4 sm:before:left-1/2 before:w-0.5 before:bg-khmer-gold/40"></div>
+      </div>
+    </section>
+
+    <!-- Gift / QR -->
+    <section class="my-8 rv">
+      <div class="bg-gradient-to-b from-dark-maroon via-deep-maroon to-dark-maroon p-5 sm:p-6 rounded-2xl border-2 border-khmer-gold text-white shadow-xl relative overflow-hidden">
+        <div class="text-center mb-5 relative z-10">
+          <span class="text-3xl mb-1 inline-block float-y">🧧</span>
+          <h3 class="font-moul text-base sm:text-lg text-khmer-gold mb-1" data-km="កញ្ចប់ចំណងដៃឌីជីថល" data-en="DIGITAL GIFT ENVELOPE (QR PAY)">កញ្ចប់ចំណងដៃឌីជីថល</h3>
+          <p class="text-xs text-khmer-gold-light/90 max-w-sm mx-auto" data-km="លោកអ្នកអាចផ្ញើពរជ័យ និងចំណងដៃតាមរយៈ ABA / Bakong KHQR ទទួលបានយ៉ាងងាយស្រួល" data-en="Send your warm blessings and wedding gifts directly via ABA / Bakong KHQR">លោកអ្នកអាចផ្ញើពរជ័យ និងចំណងដៃតាមរយៈ ABA / Bakong KHQR ទទួលបានយ៉ាងងាយស្រួល</p>
+        </div>
+        <div class="bg-sand-card text-gray-800 p-4 rounded-xl border-2 border-khmer-gold max-w-xs mx-auto text-center shadow-2xl relative z-10">
+          <div class="flex items-center justify-between border-b border-khmer-gold/30 pb-2 mb-3"><span class="font-moul text-xs text-deep-maroon">ABA BANK</span><span class="bg-red-600 text-white text-[9px] font-bold px-2 py-0.5 rounded">KHQR</span></div>
+          <div onclick="openQRModal()" class="qr-glow cursor-pointer group relative bg-white p-2.5 rounded-lg border border-gray-200 inline-block mb-3 transition-transform transform hover:scale-105">
+            <img src="QR.jpg" alt="ABA KHQR Code" class="w-44 h-44 mx-auto object-contain">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center text-white text-xs font-bold gap-1"><i class="fa-solid fa-expand"></i><span data-km="ពង្រីក" data-en="Enlarge">ពង្រីក</span></div>
+          </div>
+          <div class="text-center space-y-0.5 mb-3">
+            <p class="text-[10px] text-gray-500 uppercase tracking-wider">Account Name</p>
+            <p class="font-moul text-xs text-deep-maroon">SAN BUNSEANG / THEN BUNNET</p>
+            <p class="text-[11px] font-bold text-gray-700"><span class="acc-display"></span> (USD)</p>
+          </div>
+          <button onclick="copyAccNumber()" class="w-full bg-deep-maroon hover:bg-dark-maroon text-khmer-gold border border-khmer-gold text-xs font-bold py-2 px-3 rounded-lg shadow transition-all flex items-center justify-center gap-2"><i class="fa-regular fa-copy"></i><span data-km="ចម្លងលេខគណនី" data-en="Copy Account Number">ចម្លងលេខគណនី</span></button>
+        </div>
+        <p class="text-[11px] text-center text-khmer-gold-light/80 italic mt-4" data-km="សូមអរគុណយ៉ាងជ្រាលជ្រៅសម្រាប់ទឹកចិត្ត និងពរជ័យដ៏ថ្លៃថ្លា!" data-en="Thank you very much for your blessings and generosity!">សូមអរគុណយ៉ាងជ្រាលជ្រៅសម្រាប់ទឹកចិត្ត និងពរជ័យដ៏ថ្លៃថ្លា!</p>
+      </div>
+    </section>
+
+    <!-- Gallery (Multiple Card Styles & Sliding Animations) -->
+    <section class="my-8 rv">
+      <div class="text-center mb-6">
+        <h3 class="font-moul text-deep-maroon text-base" data-km="រូបភាពកម្រងអនុស្សាវរីយ៍" data-en="OUR MEMORIES GALLERY">រូបភាពកម្រងអនុស្សាវរីយ៍</h3>
+        <div class="w-16 h-[2px] bg-khmer-gold mx-auto mt-1 draw"></div>
+      </div>
+      <div id="gallery" class="space-y-6"></div>
+    </section>
+
+    <!-- Map -->
+    <section class="my-8 rv">
+      <div class="text-center mb-6"><h3 class="font-moul text-deep-maroon text-base" data-km="ទីតាំងកម្មវិធីមង្គលការ" data-en="WEDDING VENUE & LOCATION">ទីតាំងកម្មវិធីមង្គលការ</h3><div class="w-16 h-[2px] bg-khmer-gold mx-auto mt-1 draw"></div></div>
+      <div class="bg-white/90 p-3 rounded-xl border border-khmer-gold/40 shadow-sm text-center space-y-3 backdrop-blur-sm">
+        <div class="rounded-lg overflow-hidden border border-gray-200 h-48 relative">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31489.157833075253!2d105.40!3d12.32!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDE5JzEyLjAiTiAxMDXCsDI0JzAwLjAiRQ!5e0!3m2!1sen!2skh!4v1650000000000!5m2!1sen!2skh" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <h4 class="font-moul text-xs text-deep-maroon">ភូមិ បុសពោធ៍ ឃុំ មេសរជ្រៃ ស្រុក ស្ទឹងត្រង់ ខេត្ត កំពង់ចាម</h4>
+        <a href="https://maps.app.goo.gl/1qQLgDnd52sXxqia9?g_st=ic" target="_blank" class="inline-flex items-center justify-center gap-2 bg-deep-maroon hover:bg-dark-maroon text-khmer-gold-light border border-khmer-gold text-xs font-bold py-2.5 px-5 rounded-xl shadow transition-all w-full"><i class="fa-solid fa-map-location-dot"></i><span data-km="បើកមើលក្នុង Google Maps" data-en="Open in Google Maps">បើកមើលក្នុង Google Maps</span></a>
+      </div>
+    </section>
+
+    <!-- Guestbook -->
+    <section class="my-8 bg-white/90 p-4 rounded-xl border border-khmer-gold/40 shadow-sm text-left backdrop-blur-sm rv">
+      <div class="text-center mb-4">
+        <h3 class="font-moul text-deep-maroon text-sm" data-km="សៀវភៅសារជូនពរ" data-en="GUESTBOOK WISHES">សៀវភៅសារជូនពរ</h3>
+        <p class="text-[11px] text-gray-500 mt-0.5" data-km="សូមទុកសារជូនពរដ៏ថ្លៃថ្លារបស់លោកអ្នកនៅទីនេះ" data-en="Leave your warm wishes for the couple here">សូមទុកសារជូនពរដ៏ថ្លៃថ្លារបស់លោកអ្នកនៅទីនេះ</p>
+      </div>
+      <form id="guestbook-form" onsubmit="submitWish(event)" class="space-y-3 mb-5">
+        <div><label class="block text-[11px] font-bold text-gray-700 mb-1" data-km="ឈ្មោះរបស់អ្នក" data-en="Your Name">ឈ្មោះរបស់អ្នក</label><input type="text" id="guest-name" required placeholder="ឧ. លោក & អ្នកស្រី ..." class="w-full text-xs p-2.5 rounded-lg border border-gray-300 focus:outline-none focus:border-khmer-gold"></div>
+        <div><label class="block text-[11px] font-bold text-gray-700 mb-1" data-km="សារជូនពរ" data-en="Your Blessing Message">សារជូនពរ</label><textarea id="guest-message" required rows="2" placeholder="សូមជូនពរឱ្យ..." class="w-full text-xs p-2.5 rounded-lg border border-gray-300 focus:outline-none focus:border-khmer-gold"></textarea></div>
+        <button type="submit" class="w-full bg-deep-maroon hover:bg-dark-maroon text-khmer-gold border border-khmer-gold text-xs font-bold py-2.5 rounded-lg shadow transition-all flex items-center justify-center gap-2"><i class="fa-solid fa-paper-plane"></i><span data-km="ផ្ញើសារជូនពរ" data-en="Send Wish">ផ្ញើសារជូនពរ</span></button>
+      </form>
+    </section>
+
+    <footer class="text-center pt-6 border-t border-khmer-gold/40 mt-6">
+      <div class="flex items-center justify-center mb-2"><svg width="40" height="16" viewBox="0 0 100 40" fill="none"><path d="M50 0C52 10 60 18 70 20C60 22 52 30 50 40C48 30 40 22 30 20C40 18 48 10 50 0Z" fill="#D4AF37"/></svg></div>
+      <p class="font-moul text-xs text-deep-maroon" data-km="សូមអរគុណយ៉ាងជ្រាលជ្រៅ!" data-en="THANK YOU!">សូមអរគុណយ៉ាងជ្រាលជ្រៅ!</p>
+      <p class="text-[10px] text-gray-500 mt-1">© 2026 San Bunseang &amp; Then Bunnet Wedding</p>
+    </footer>
+  </div>
+</div>
+</main>
+
+<!-- QR modal -->
+<div id="qr-modal" class="fixed inset-0 z-50 bg-black/80 hidden items-center justify-center p-4 backdrop-blur-sm" onclick="closeQRModal()">
+  <div class="bg-white rounded-2xl p-5 max-w-xs w-full text-center relative shadow-2xl border-2 border-khmer-gold" onclick="event.stopPropagation()">
+    <button onclick="closeQRModal()" class="absolute top-3 right-3 w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center text-gray-700 font-bold"><i class="fa-solid fa-xmark"></i></button>
+    <h4 class="font-moul text-deep-maroon text-sm mb-3">ABA KHQR</h4>
+    <div class="bg-gray-50 p-3 rounded-xl border border-gray-200 inline-block mb-3"><img src="QR.jpg" alt="ABA KHQR Large" class="w-64 h-64 mx-auto object-contain"></div>
+    <p class="font-moul text-xs text-deep-maroon">SAN BUNSEANG / THEN BUNNET</p>
+    <p class="text-xs text-gray-600 font-bold mt-1 acc-display"></p>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/90 hidden items-center justify-center p-4 backdrop-blur-md" onclick="closeLightbox()">
+  <div class="relative max-w-2xl w-full text-center" onclick="event.stopPropagation()">
+    <button onclick="closeLightbox()" class="absolute -top-12 right-0 text-white text-2xl font-bold p-2 hover:text-khmer-gold"><i class="fa-solid fa-xmark"></i></button>
+    <img id="lightbox-img" src="" alt="Zoomed Photo" class="max-h-[80vh] mx-auto rounded-xl border-2 border-khmer-gold shadow-2xl object-contain">
+    <p id="lightbox-caption" class="text-khmer-gold-light text-sm mt-3 font-moul"></p>
+  </div>
+</div>
+
+<script>
+/* ===================== SETTINGS ===================== */
+const PHOTOS   = ['5.jpg', '2.jpg', '3.JPG', '4.jpg'];
+const ACCOUNT  = '005907166';
+const WEDDING_DATE = 'December 12, 2026 15:00:00';
+/* ==================================================== */
+
+const $  = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const audio = $('#bg-audio');
+let isAudioPlaying = false;
+let currentLang = 'km';
+let currentTheme = 1;
+
+$$('.acc-display').forEach(el => el.textContent = ACCOUNT.replace(/(\d{3})(\d{3})(\d{3})/, '$1 $2 $3'));
+
+const DAY1 = [
+  ['០៣:០០ ល្ងាច', 'ពិធីសែនក្រុងពាលី', '🏮'],
+  ['០៤:០០ ល្ងាច', 'ពិធីសូត្រមន្តចម្រើនព្រះបរិត្ត', '📜'],
+  ['០៥:០០ ល្ងាច', 'ពិធីជុំពេលា និងជាវខាន់ស្លា', '🕯️'],
+  ['០៦:៣០ ល្ងាច', 'អញ្ជើញភ្ញៀវកិត្តិយសពិសាអាហារពេលល្ងាច', '🍽️']
+];
+
+const DAY2 = [
+  ['០៦:៣០ ព្រឹក', 'ជួបជុំភ្ញៀវកិត្តិយស ដើម្បីរៀបចំរៀបចំហែជំនូន', '👥'],
+  ['០៧:០០ ព្រឹក', 'ពិធីហែជំនូនកំណត់ចូលរោងជ័យ', '🎉'],
+  ['០៧:៣០ ព្រឹក', 'វិធីចៅមហានិយាយជើងការ សែនព្រេន រៀបរៀបរាប់ផ្លែឈើ និងភោជនីយាហារពេលព្រឹក', '🌿'],
+  ['០៨:០០ ព្រឹក', 'ពិធីបំពាក់ចិញ្ចៀន', '💍'],
+  ['០៩:០០ ព្រឹក', 'ពិធីកាត់សក់បង្កក់សិរី កូនប្រុស-កូនស្រី', '✂️'],
+  ['១១:០០ ព្រឹក', 'ពិធីសំពះផ្ទឹមចងដៃ បង្វិលពពិល និងព្រះថោងតោងស្បៃ', '🌸'],
+  ['១២:០០ ថ្ងៃត្រង់', 'អញ្ជើញភ្ញៀវកិត្តិយសពិសារភោជនីយអាហារថ្ងៃត្រង់ បញ្ចប់កិច្ចអាពាហ៍ពិពាហ៍', '🍲'],
+  ['០៥:០០ ល្ងាច', 'អញ្ជើញភ្ញៀវកិត្តិយសពិសារភោជនីយអាហារ នៅគេហដ្ឋានខាងស្រី ដោយមេត្រីភាព', '🥂']
+];
+
+function renderTimeline(id, rows) {
+  $(id).innerHTML = rows.map(([t, title, icon], i) => {
+    const side = i % 2 === 0 ? 'sm:pr-6 sm:text-right' : 'sm:left-1/2 sm:pl-6 sm:ml-auto';
+    return `<div class="relative flex items-start gap-3 sm:gap-0">
+      <div class="tl-dot absolute left-4 sm:left-1/2 -translate-x-1/2 w-7 h-7 rounded-full bg-deep-maroon border-2 border-khmer-gold flex items-center justify-center text-khmer-gold text-xs shadow z-10">${icon}</div>
+      <div class="ml-10 sm:ml-0 sm:w-1/2 ${side} w-full"><div class="${i % 2 ? 'rv-r' : 'rv-l'} bg-white p-3 rounded-xl border border-khmer-gold/30 shadow-sm">
+        <span class="inline-block px-2 py-0.5 bg-khmer-gold/20 text-deep-maroon rounded text-xs font-bold mb-1">${t}</span>
+        <h4 class="font-moul text-xs text-deep-maroon">${title}</h4></div></div></div>`;
+  }).join('');
+}
+renderTimeline('#tl-1', DAY1); 
+renderTimeline('#tl-2', DAY2);
+
+const CAPTIONS = ['Traditional Couple Portrait','Angkor Wat Temple View','Temple Architecture Portrait','Window Archway Portrait'];
+
+/* Multi-Style Dynamic Gallery (Alternating Slide-in Cards with Golden Borders & Badges) */
+$('#gallery').innerHTML = PHOTOS.map((src, i) => {
+  const animClass = i % 2 === 0 ? 'rv-l' : 'rv-r';
+  return `
+  <div onclick="openLightbox('${src}','${CAPTIONS[i] || ''}')" class="${animClass} cursor-pointer group relative overflow-hidden rounded-2xl border-4 border-khmer-gold/60 shadow-xl bg-white p-2">
+    <div class="relative overflow-hidden rounded-xl h-80 sm:h-[420px]">
+      <img src="${src}" alt="Gallery ${i + 1}" class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-700">
+      <div class="absolute top-3 left-3 bg-deep-maroon/80 backdrop-blur-md text-khmer-gold border border-khmer-gold/50 px-3 py-1 rounded-full text-[10px] font-bold shadow">
+        <i class="fa-solid fa-heart mr-1"></i> អនុស្សាវរីយ៍ទី ${i + 1}
+      </div>
     </div>
+    <div class="pt-3 pb-2 text-center">
+      <h4 class="font-moul text-xs sm:text-sm text-deep-maroon">${CAPTIONS[i] || 'Wedding Memory'}</h4>
+      <p class="text-[11px] text-gray-500 mt-0.5"><i class="fa-solid fa-magnifying-glass-plus mr-1 text-khmer-gold"></i> ចុចដើម្បីពង្រីករូបភាព</p>
+    </div>
+  </div>`;
+}).join('');
 
-    <!-- JAVASCRIPT LOGIC -->
-    <script>
-        function createParticles() {
-            const container = document.getElementById('particles-container');
-            for (let i = 0; i < 10; i++) {
-                const p = document.createElement('div');
-                p.className = 'particle';
-                p.style.left = Math.random() * 100 + 'vw';
-                p.style.animationDuration = (8 + Math.random() * 8) + 's';
-                p.style.animationDelay = (Math.random() * 5) + 's';
-                p.innerHTML = `
-                    <svg width="20" height="20" viewBox="0 0 100 100" fill="#D4AF37">
-                        <path d="M50 0C52 15 65 28 80 30C65 32 52 45 50 60C48 45 35 32 20 30C35 28 48 15 50 0Z"/>
-                    </svg>
-                `;
-                container.appendChild(p);
-            }
-        }
-        createParticles();
+(function () {
+  const SECONDS_EACH = 8, stage = document.createElement('div');
+  stage.id = 'photo-bg';
+  PHOTOS.forEach((src, i) => {
+    const s = document.createElement('div'); s.className = 'slide';
+    s.style.backgroundImage = `url("${src}")`;
+    s.style.setProperty('--cycle', (PHOTOS.length * SECONDS_EACH) + 's');
+    s.style.setProperty('--delay', (i * SECONDS_EACH) + 's');
+    stage.appendChild(s);
+  });
+  document.body.prepend(stage);
+})();
 
-        const audio = document.getElementById('bg-audio');
-        let isAudioPlaying = false;
+/* Gate Interaction & UI Controls */
+$('#gate-open').addEventListener('click', () => {
+  $('#envelope-modal').classList.add('opening');
+  setTimeout(() => $('#envelope-modal').style.display = 'none', 1600);
+  toggleAudio();
+});
 
-        function openInvitation() {
-            const modal = document.getElementById('envelope-modal');
-            modal.style.opacity = '0';
-            setTimeout(() => { modal.style.display = 'none'; }, 700);
+function toggleLanguage() {
+  currentLang = currentLang === 'km' ? 'en' : 'km';
+  $('#lang-indicator').textContent = currentLang === 'km' ? 'EN' : 'KH';
+  $$('[data-km]').forEach(el => {
+    el.textContent = el.getAttribute(`data-${currentLang}`);
+  });
+}
 
-            audio.play().then(() => {
-                isAudioPlaying = true;
-                document.getElementById('music-pulse').classList.remove('hidden');
-                document.getElementById('music-icon').classList.add('spinning');
-            }).catch(e => { console.log("Audio autoplay restricted:", e); });
-        }
+function toggleTheme() {
+  currentTheme = currentTheme === 1 ? 2 : currentTheme === 2 ? 3 : 1;
+  $('#theme-indicator').textContent = `Style ${currentTheme}`;
+  document.body.classList.remove('theme-rose', 'theme-navy');
+  if (currentTheme === 2) {
+    document.body.classList.add('theme-rose');
+  } else if (currentTheme === 3) {
+    document.body.classList.add('theme-navy');
+  }
+}
 
-        function toggleAudio() {
-            if (isAudioPlaying) {
-                audio.pause();
-                isAudioPlaying = false;
-                document.getElementById('music-pulse').classList.add('hidden');
-                document.getElementById('music-icon').classList.remove('spinning');
-            } else {
-                audio.play();
-                isAudioPlaying = true;
-                document.getElementById('music-pulse').classList.remove('hidden');
-                document.getElementById('music-icon').classList.add('spinning');
-            }
-        }
+function toggleAudio() {
+  if (isAudioPlaying) {
+    audio.pause();
+    isAudioPlaying = false;
+    $('#music-icon').className = 'fa-solid fa-music text-xs';
+    $('#music-pulse').classList.add('hidden');
+  } else {
+    audio.play().then(() => {
+      isAudioPlaying = true;
+      $('#music-icon').className = 'fa-solid fa-volume-high text-xs';
+      $('#music-pulse').classList.remove('hidden');
+    }).catch(e => console.log("Audio play blocked", e));
+  }
+}
 
-        let currentLang = 'km';
-        function toggleLanguage() {
-            currentLang = currentLang === 'km' ? 'en' : 'km';
-            document.getElementById('lang-indicator').innerText = currentLang === 'km' ? 'EN' : 'ខ្មែរ';
-            document.querySelectorAll('[data-km]').forEach(el => {
-                el.innerText = currentLang === 'en' ? el.getAttribute('data-en') : el.getAttribute('data-km');
-            });
-        }
+// Countdown Timer
+const weddingDate = new Date(WEDDING_DATE).getTime();
+function updateCountdown() {
+  const now = new Date().getTime();
+  const diff = weddingDate - now;
+  if (diff <= 0) {
+    $('#days').textContent = '00';
+    $('#hours').textContent = '00';
+    $('#minutes').textContent = '00';
+    $('#seconds').textContent = '00';
+    return;
+  }
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+  
+  $('#days').textContent = String(days).padStart(2, '0');
+  $('#hours').textContent = String(hours).padStart(2, '0');
+  $('#minutes').textContent = String(minutes).padStart(2, '0');
+  $('#seconds').textContent = String(seconds).padStart(2, '0');
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
 
-        const weddingTime = new Date("December 12, 2026 15:00:00").getTime();
-        setInterval(() => {
-            const now = new Date().getTime();
-            const distance = weddingTime - now;
-            if (distance > 0) {
-                document.getElementById('days').innerText = String(Math.floor(distance / (1000 * 60 * 60 * 24))).padStart(2, '0');
-                document.getElementById('hours').innerText = String(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
-                document.getElementById('minutes').innerText = String(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-                document.getElementById('seconds').innerText = String(Math.floor((distance % (1000 * 60)) / 1000)).padStart(2, '0');
-            }
-        }, 1000);
+// Toast Notifications
+function showToast(msg) {
+  const toast = $('#toast-banner');
+  $('#toast-message').textContent = msg;
+  toast.classList.remove('hidden');
+  setTimeout(() => toast.classList.add('hidden'), 3000);
+}
 
-        function copyAccNumber() {
-            navigator.clipboard.writeText("000123456");
-            const toast = document.getElementById('toast-banner');
-            toast.classList.remove('hidden');
-            setTimeout(() => { toast.classList.add('hidden'); }, 3000);
-        }
+function copyAccNumber() {
+  navigator.clipboard.writeText(ACCOUNT).then(() => {
+    showToast(currentLang === 'km' ? 'បានចម្លងលេខគណនី!' : 'Account number copied!');
+  });
+}
 
-        function openQRModal() {
-            document.getElementById('qr-modal').classList.remove('hidden');
-            document.getElementById('qr-modal').classList.add('flex');
-        }
-        function closeQRModal() {
-            document.getElementById('qr-modal').classList.add('hidden');
-            document.getElementById('qr-modal').classList.remove('flex');
-        }
+// QR Modal & Lightbox
+function openQRModal() { $('#qr-modal').classList.remove('hidden'); $('#qr-modal').classList.add('flex'); }
+function closeQRModal() { $('#qr-modal').classList.remove('flex'); $('#qr-modal').classList.add('hidden'); }
 
-        function openLightbox(imgSrc, caption) {
-            document.getElementById('lightbox-img').src = imgSrc;
-            document.getElementById('lightbox-caption').innerText = caption;
-            document.getElementById('lightbox-modal').classList.remove('hidden');
-            document.getElementById('lightbox-modal').classList.add('flex');
-        }
-        function closeLightbox() {
-            document.getElementById('lightbox-modal').classList.add('hidden');
-            document.getElementById('lightbox-modal').classList.remove('flex');
-        }
+function openLightbox(src, caption) {
+  $('#lightbox-img').src = src;
+  $('#lightbox-caption').textContent = caption;
+  $('#lightbox-modal').classList.remove('hidden');
+  $('#lightbox-modal').classList.add('flex');
+}
+function closeLightbox() {
+  $('#lightbox-modal').classList.remove('flex');
+  $('#lightbox-modal').classList.add('hidden');
+}
 
-      
+// Guestbook Wish Submission
+function submitWish(e) {
+  e.preventDefault();
+  const name = $('#guest-name').value;
+  const msg = $('#guest-message').value;
+  if (name && msg) {
+    showToast(currentLang === 'km' ? 'អរគុណសម្រាប់សារជូនពរដ៏ថ្លៃថ្លា!' : 'Thank you for your warm wish!');
+    $('#guestbook-form').reset();
+  }
+}
 
-        function submitWish1(e) {
-            e.preventDefault();
-            const nameInput = document.getElementById('guest-name');
-            const msgInput = document.getElementById('guest-message');
-            const wishes = JSON.parse(localStorage.getItem('wedding_wishes') || '[]');
-            wishes.unshift({ name: nameInput.value, message: msgInput.value, date: new Date().toLocaleDateString() });
-            localStorage.setItem('wedding_wishes', JSON.stringify(wishes));
-            nameInput.value = '';
-            msgInput.value = '';
+// Scroll Animation Observer
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+    }
+  });
+}, { threshold: 0.15 });
 
-        }
-		async function submitWish(e) {
-			e.preventDefault();
-			const nameInput = document.getElementById('guest-name');
-			const msgInput = document.getElementById('guest-message');
-			
-			const name = nameInput.value;
-			const message = msgInput.value;
-			const date = new Date().toLocaleString();
-
-			// Telegram Bot Token របស់អ្នក
-			const botToken = "8942359354:AAEdqXK-9ILWJe7vRmw3DSRMiOdge_rlAvM"; 
-			
-			// ជំនួស "YOUR_CHAT_ID_HERE" ជាមួយ Chat ID របស់អ្នក (ឧ. 123456789)
-			const chatId = "684621536";
-			
-			const text = `💌 មានសារជូនពរថ្មីពីធៀបការ!\n\n👤 ឈ្មោះ៖ ${name}\n💬 សារ៖ ${message}\n⏰ ពេល៖ ${date}`;
-			const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`;
-
-			try {
-				const response = await fetch(url);
-				if (response.ok) {
-					// បង្ហាញ Toast Alert ជូនដំណឹងថាបានជោគជ័យ
-					const toast = document.getElementById('toast-banner');
-					document.getElementById('toast-message').innerText = "បានផ្ញើសារជូនពរទៅកាន់ Telegram រួចរាល់!";
-					toast.classList.remove('hidden');
-					setTimeout(() => { toast.classList.add('hidden'); }, 3000);
-
-					// សម្អាតទម្រង់បញ្ចូល (Form)
-					nameInput.value = '';
-					msgInput.value = '';
-				} else {
-					alert("មានបញ្ហាក្នុងការផ្ញើសារ សូមព្យាយាមម្ដងទៀត។");
-				}
-			} catch (error) {
-				console.error("Error:", error);
-				alert("មិនអាចតភ្ជាប់ទៅកាន់ Telegram បានទេ!");
-			}
-		}
-		
-
-        function escapeHtml(text) {
-            return text.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m]));
-        }
-
-        
-    </script>
+$$('.rv, .rv-l, .rv-r, .rv-z, .draw, .tl-line, .tl-dot').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
