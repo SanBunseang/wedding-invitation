@@ -9,34 +9,22 @@
     <link rel="icon" type="image/jpeg" href="1.jpg">
     <link rel="apple-touch-icon" href="1.jpg">
 
-<!-- Open Graph Default Fallback Tags -->
+<!-- Open Graph & Link Preview Meta Tags (Fixed Absolute Paths) -->
     <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sanbunseang.github.io/wedding-invitation/">
     <meta property="og:title" content="សិរីសួស្តី អាពាហ៍ពិពាហ៍ | San Bunseang & Then Bunnet">
     <meta property="og:description" content="សូមគោរពអញ្ជើញ ឯកឧត្តម លោកជំទាវ លោក លោកស្រី ចូលរួមក្នុងពិធីរៀបអាពាហ៍ពិពាហ៍របស់យើងខ្ញុំ នៅថ្ងៃទី ១៣ ខែធ្នូ ឆ្នាំ២០២៦។">
-    <meta property="og:image" content="1.jpg"> <!-- ដាក់បែបខ្លីនៅទីនេះ -->
+    <meta property="og:image" content="https://sanbunseang.github.io/wedding-invitation/1.jpg">
+    <meta property="og:image:secure_url" content="https://sanbunseang.github.io/wedding-invitation/1.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
 
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="សិរីសួស្តី អាពាហ៍ពិពាហ៍ | San Bunseang & Then Bunnet">
-    <meta name="twitter:description" content="សូមគោរពអញ្ជើញ ឯកឧត្តម លោកជំទាវ លោក លោកស្រី ចូលរួមក្នុងពិធីរៀបអាពាហ៍ពិពាហ៍របស់យើងខ្ញុំ។">
-    <meta name="twitter:image" content="1.jpg"> <!-- ដាក់បែបខ្លីនៅទីនេះ -->
-    <!-- Script បង្ខំទាញយក Domain ពិតប្រាកដមកបំពេញស្វ័យប្រវត្តិឱ្យ Bot អានចេញ -->
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        const baseUrl = window.location.origin + window.location.pathname.replace(/\/[^\/]*$/, '/');
-        
-        // បង្កើត និងកែសម្រួល og:url, og:image, twitter:image ឱ្យក្លាយជា Absolute URL ស្វ័យប្រវត្តិ
-        const updateMeta = (property, content) => {
-          let element = document.querySelector(`meta[property='${property}']`) || document.querySelector(`meta[name='${property}']`);
-          if (element) {
-            element.setAttribute('content', content);
-          }
-        };
-
-        updateMeta('og:url', window.location.href);
-        updateMeta('og:image', baseUrl + '1.jpg');
-        updateMeta('twitter:image', baseUrl + '1.jpg');
-      });
-    </script>
+    <meta name="twitter:description" content="សូមគោရពអញ្ជើញ ឯកឧត្តម លោកជំទាវ លោក លោកស្រី ចូលរួមក្នុងពិធីរៀបអាពាហ៍ពិពាហ៍របស់យើងខ្ញុំ។">
+    <meta name="twitter:image" content="https://sanbunseang.github.io/wedding-invitation/1.jpg">
 	
 <title>សិរីសួស្តី អាពាហ៍ពិពាហ៍ | San Bunseang &amp; Then Bunnet</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
