@@ -21,6 +21,7 @@ tailwind.config = { theme: { extend: {
 </script>
 
 <style>
+
   html { scroll-behavior: smooth; }
   body { background-color:#3a0009; font-family:'Nokora',sans-serif; color:#333; overflow-x:hidden; transition: background-color 0.5s ease; position: relative; }
   body.theme-rose { background-color:#3d1a20; }
@@ -235,6 +236,7 @@ tailwind.config = { theme: { extend: {
 
 <!-- Floating Controls (Language, Music) -->
 <div class="fixed top-4 right-4 z-40 flex items-center gap-2">
+
   <button id="lang-btn" onclick="toggleLanguage()" class="bg-deep-maroon/90 text-khmer-gold-light border border-khmer-gold px-3 py-1.5 rounded-full shadow-lg text-xs font-bold hover:bg-khmer-gold hover:text-deep-maroon transition-all flex items-center gap-1.5 backdrop-blur-md">
     <i class="fa-solid fa-globe"></i><span id="lang-indicator">EN</span>
   </button>
@@ -246,7 +248,7 @@ tailwind.config = { theme: { extend: {
 
 <audio id="bg-audio" loop preload="auto"><source src="OLICA - ភ្ជាប់និស្ស័យ - NISAI (ft. KZ) Long & Chan (Official Lyric Video).mp3" type="audio/mpeg"></audio>
 
-<main class="w-full max-w-xl mx-auto sm:py-8 relative z-10">
+<main id="invitation-content" class="w-full max-w-xl mx-auto sm:py-8 relative z-10">
 <div class="glass-box shadow-2xl relative overflow-hidden rounded-2xl p-4 sm:p-6">
 
   <!-- kbach corners with delicate flower accents -->
@@ -599,44 +601,139 @@ function updateCountdown() {
 }
 setInterval(updateCountdown, 1000);
 updateCountdown();
-		async function submitWish(e) {
-			e.preventDefault();
-			const nameInput = document.getElementById('guest-name');
-			const msgInput = document.getElementById('guest-message');
-			
-			const name = nameInput.value;
-			const message = msgInput.value;
-			const date = new Date().toLocaleString();
+// 1.  ទាញយក Device និង Browser ពិតប្រាកដ
+function getRealDeviceInfo() {
+    const ua = navigator.userAgent;
+    let device = "Desktop / Laptop 💻";
+    let os = "Unknown OS";
+    let browser = "Standard Browser 🌐";
 
-			// Telegram Bot Token របស់អ្នក
-			const botToken = "8942359354:AAEdqXK-9ILWJe7vRmw3DSRMiOdge_rlAvM"; 
-			
-			// ជំនួស "YOUR_CHAT_ID_HERE" ជាមួយ Chat ID របស់អ្នក (ឧ. 123456789)
-			const chatId = "684621536";
-			
-			const text = `💌 មានសារជូនពរថ្មីពីធៀបការ!\n\n👤 ឈ្មោះ៖ ${name}\n💬 សារ៖ ${message}\n⏰ ពេល៖ ${date}`;
-			const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`;
+    if (/android/i.test(ua)) {
+        os = "Android";
+        let match = ua.match(/;\s*([A-Za-z0-9\s\-_]+)\s+Build\//) || ua.match(/\(([^;]+);\s*Android/);
+        if (match && match[1]) {
+            let model = match[1].trim();
+            device = model.includes("Mobile") ? model : model + " 📱";
+        } else {
+            device = "Android Phone 📱";
+        }
+    } else if (/iphone|ipad|ipod/i.test(ua)) {
+        os = "iOS";
+        if (/iphone/i.test(ua)) device = "iPhone 📱";
+        else if (/ipad/i.test(ua)) device = "iPad 📱";
+        else device = "Apple iOS Device 📱";
+    } else if (/windows/i.test(ua)) {
+        os = "Windows";
+        device = "Windows PC 💻";
+    } else if (/macintosh|mac os x/i.test(ua)) {
+        os = "Mac OS";
+        device = "MacBook / Mac 💻";
+    } else if (/linux/i.test(ua)) {
+        os = "Linux";
+        device = "Linux Computer 💻";
+    }
 
-			try {
-				const response = await fetch(url);
-				if (response.ok) {
-					// បង្ហាញ Toast Alert ជូនដំណឹងថាបានជោគជ័យ
-					const toast = document.getElementById('toast-banner');
-					document.getElementById('toast-message').innerText = "បានផ្ញើសារជូនពរទៅកាន់ Telegram រួចរាល់!";
-					toast.classList.remove('hidden');
-					setTimeout(() => { toast.classList.add('hidden'); }, 3000);
+    if (/fbav|fban/i.test(ua)) {
+        browser = "Facebook In-App Browser 🌐";
+    } else if (/instagram/i.test(ua)) {
+        browser = "Instagram In-App Browser 🌐";
+    } else if (/telegram/i.test(ua)) {
+        browser = "Telegram In-App Browser 🌐";
+    } else if (/chrome|crios/i.test(ua) && !/edge|opr/i.test(ua)) {
+        browser = "Google Chrome 🌐";
+    } else if (/safari/i.test(ua) && !/chrome|crios/i.test(ua)) {
+        browser = "Apple Safari 🌐";
+    } else if (/edg/i.test(ua)) {
+        browser = "Microsoft Edge 🌐";
+    } else if (/firefox|fxios/i.test(ua)) {
+        browser = "Mozilla Firefox 🌐";
+    }
 
-					// សម្អាតទម្រង់បញ្ចូល (Form)
-					nameInput.value = '';
-					msgInput.value = '';
-				} else {
-					alert("មានបញ្ហាក្នុងការផ្ញើសារ សូមព្យាយាមម្ដងទៀត។");
-				}
-			} catch (error) {
-				console.error("Error:", error);
-				alert("មិនអាចតភ្ជាប់ទៅកាន់ Telegram បានទេ!");
-			}
-		}
+    return { device, os, browser };
+}
+// បញ្ជី Chat ID ទាំងអស់ដែលអ្នកចង់ឱ្យទទួលសារ (អាចបន្ថែម ឬលុបចេញតាមតម្រូវការ)
+const targetChatIds = ["684621536"]; 
+const botToken = "8942359354:AAGlR3Kav683Umt1snmGAnp5nuhBQ-TchBo";
+
+// 2. ផ្ញើសារជូនដំណឹងទៅ Telegram Bot (Multiple Chat IDs)
+function sendVisitorAlert() {
+    if (!botToken || targetChatIds.length === 0) return;
+
+    const info = getRealDeviceInfo();
+    const visitTime = new Date().toLocaleString('km-KH', { timeZone: 'Asia/Phnom_Penh' });
+
+    const message = `🎉 មានភ្ញៀវចូលមកមើលកាតអញ្ជើញ!\n\n` +
+                    `📱 ឧបករណ៍: ${info.device}\n` +
+                    `⚙️ ប្រព័ន្ធ: ${info.os}\n` +
+                    `🌐 Browser: ${info.browser}\n` +
+                    `⏰ ម៉ោង: ${visitTime}\n` +
+                    `🔗 ពី Link: ${window.location.hostname}`;
+
+    // ផ្ញើទៅកាន់គ្រប់ Chat ID ទាំងអស់ក្នុង List ພ້ອມៗគ្នា
+    targetChatIds.forEach(chatId => {
+        const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=` + encodeURIComponent(message);
+
+        fetch(url, { 
+            method: 'GET',
+            keepalive: true,
+            mode: 'no-cors'
+        }).catch(err => {
+            navigator.sendBeacon(url);
+        });
+    });
+}
+
+// 3. កូដសម្រាប់ផ្ញើសារជូនពរ (Submit Wish - Multiple Chat IDs)
+async function submitWish(e) {
+    e.preventDefault();
+    const nameInput = document.getElementById('guest-name');
+    const msgInput = document.getElementById('guest-message');
+    
+    const name = nameInput.value;
+    const message = msgInput.value;
+    const date = new Date().toLocaleString();
+
+    if (!botToken || targetChatIds.length === 0) return;
+
+    const text = `💌 មានសារជូនពរថ្មីពីធៀបការ!\n\n👤 ឈ្មោះ៖ ${name}\n💬 សារ៖ ${message}\n⏰ ពេល៖ ${date}`;
+
+    let successCount = 0;
+
+    try {
+        // ប្រើប្រាស់ Promise.all ដើម្បីផ្ញើទៅគ្រប់ Chat ID ព្រមគ្នា និងរង់ចាំលទ្ធផល
+        const promises = targetChatIds.map(async (chatId) => {
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`;
+            const response = await fetch(url);
+            if (response.ok) successCount++;
+        });
+
+        await Promise.all(promises);
+
+        if (successCount > 0) {
+            const toast = document.getElementById('toast-banner');
+            document.getElementById('toast-message').innerText = "បានផ្ញើសារជូនពរទៅកាន់ Telegram រួចរាល់!";
+            toast.classList.remove('hidden');
+            setTimeout(() => { toast.classList.add('hidden'); }, 3000);
+
+            nameInput.value = '';
+            msgInput.value = '';
+        } else {
+            alert("មានបញ្ហាក្នុងការផ្ញើសារ សូមព្យាយាមម្ដងទៀត។");
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("មិនអាចតភ្ជាប់ទៅកាន់ Telegram បានទេ!");
+    }
+}
+
+// 4. ចងភ្ជាប់ជាមួយប៊ូតុងបើកលិខិត (Gate Open Button)
+//const openGateBtn = document.getElementById('gate-open');
+//if (openGateBtn) {
+//    openGateBtn.addEventListener('click', () => {
+//        sendVisitorAlert();
+//    });
+//}
+		
 
 /* Scroll Reveal Observer */
 const obs = new IntersectionObserver((entries, observer) => {
@@ -650,6 +747,18 @@ const obs = new IntersectionObserver((entries, observer) => {
 }, { threshold: 0.12 });
 
 $$('.rv, .rv-l, .rv-r, .rv-z').forEach(el => obs.observe(el));
+
+
+// ចងភ្ជាប់ជាមួយប៊ូតុងបើកលិខិត (Gate Open Button)
+const openGateBtn = document.getElementById('gate-open');
+if (openGateBtn) {
+    openGateBtn.addEventListener('click', () => {
+        // ១. ផ្ញើសារដំណឹងទៅ Telegram Bot
+        sendVisitorAlert();
+    });
+}
+
+  
 </script>
 </body>
 </html>
