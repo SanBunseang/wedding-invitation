@@ -388,31 +388,6 @@ tailwind.config = { theme: { extend: {
       <div id="gallery" class="space-y-4"></div>
     </section>
 	
-    <!-- Gift / QR -->
-    <section class="my-8 rv">
-      <div class="glass-dark p-5 sm:p-6 rounded-2xl text-white shadow-xl relative overflow-hidden">
-        <div class="absolute -top-3 right-4 text-khmer-gold text-xl decor-flower"><i class="fa-solid fa-spa"></i></div>
-        <div class="text-center mb-5 relative z-10">
-          <span class="text-3xl mb-1 inline-block float-y">🧧</span>
-          <h3 class="font-moul text-base sm:text-lg text-khmer-gold mb-1" data-km="កញ្ចប់ចំណងដៃឌីជីថល" data-en="DIGITAL GIFT ENVELOPE (QR PAY)">កញ្ចប់ចំណងដៃឌីជីថល</h3>
-          <p class="text-xs text-khmer-gold-light/90 max-w-sm mx-auto" data-km="លោកអ្នកអាចផ្ញើពរជ័យ និងចំណងដៃតាមរយៈ ABA / Bakong KHQR ទទួលបានយ៉ាងងាយស្រួល" data-en="Send your warm blessings and wedding gifts directly via ABA / Bakong KHQR">លោកអ្នកអាចផ្ញើពរជ័យ និងចំណងដៃតាមរយៈ ABA / Bakong KHQR ទទួលបានយ៉ាងងាយស្រួល</p>
-        </div>
-        <div class="glass-card text-gray-850 p-4 rounded-xl border-2 border-khmer-gold max-w-xs mx-auto text-center shadow-2xl relative z-10">
-          <div class="flex items-center justify-between border-b border-khmer-gold/30 pb-2 mb-3"><span class="font-moul text-xs text-deep-maroon">ABA BANK</span><span class="bg-red-600 text-white text-[9px] font-bold px-2 py-0.5 rounded">KHQR</span></div>
-          <div onclick="openQRModal()" class="qr-glow cursor-pointer group relative bg-white p-2.5 rounded-lg border border-gray-200 inline-block mb-3 transition-transform transform hover:scale-105">
-            <img src="QR.jpg" alt="ABA KHQR Code" class="w-44 h-44 mx-auto object-contain">
-            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center text-white text-xs font-bold gap-1"><i class="fa-solid fa-expand"></i><span data-km="ពង្រីក" data-en="Enlarge">ពង្រីក</span></div>
-          </div>
-          <div class="text-center space-y-0.5 mb-3">
-            <p class="text-[10px] text-gray-500 uppercase tracking-wider">Account Name</p>
-            <p class="font-moul text-xs text-deep-maroon">SAN BUNSEANG / THEN BUNNET</p>
-            <p class="text-[11px] font-bold text-gray-750"><span class="acc-display"></span> (USD)</p>
-          </div>
-          <button onclick="copyAccNumber()" class="w-full bg-deep-maroon hover:bg-dark-maroon text-khmer-gold border border-khmer-gold text-xs font-bold py-2 px-3 rounded-lg shadow transition-all flex items-center justify-center gap-2"><i class="fa-regular fa-copy"></i><span data-km="ចម្លងលេខគណនី" data-en="Copy Account Number">ចម្លងលេខគណនី</span></button>
-        </div>
-        <p class="text-[11px] text-center text-khmer-gold-light/90 italic mt-4" data-km="សូមអរគុណយ៉ាងជ្រាលជ្រៅសម្រាប់ទឹកចិត្ត និងពរជ័យដ៏ថ្លៃថ្លា!" data-en="Thank you very much for your blessings and generosity!"><i class="fa-solid fa-dove text-khmer-gold mr-1"></i>សូមអរគុណយ៉ាងជ្រាលជ្រៅសម្រាប់ទឹកចិត្ត និងពរជ័យដ៏ថ្លៃថ្លា!<i class="fa-solid fa-dove text-khmer-gold ml-1 scale-x-[-1] inline-block"></i></p>
-      </div>
-    </section>
 
 
 
@@ -441,6 +416,37 @@ tailwind.config = { theme: { extend: {
         <button type="submit" class="w-full bg-deep-maroon hover:bg-dark-maroon text-khmer-gold border border-khmer-gold text-xs font-bold py-2.5 rounded-lg shadow transition-all flex items-center justify-center gap-2"><i class="fa-solid fa-paper-plane"></i><span data-km="ផ្ញើសារជូនពរ" data-en="Send Wish">ផ្ញើសារជូនពរ</span></button>
       </form>
     </section>
+	
+	
+	
+	    <!-- Gift / QR -->
+    <section class="my-8 rv">
+      <div class="glass-dark p-5 sm:p-6 rounded-2xl text-white shadow-xl relative overflow-hidden">
+        <div class="absolute -top-3 right-4 text-khmer-gold text-xl decor-flower"><i class="fa-solid fa-spa"></i></div>
+        <div class="text-center mb-5 relative z-10">
+          <span class="text-3xl mb-1 inline-block float-y">🧧</span>
+          <h3 class="font-moul text-base sm:text-lg text-khmer-gold mb-1" data-km="កញ្ចប់ចំណងដៃឌីជីថល" data-en="DIGITAL GIFT ENVELOPE (QR PAY)">កញ្ចប់ចំណងដៃឌីជីថល</h3>
+          <p class="text-xs text-khmer-gold-light/90 max-w-sm mx-auto" data-km="លោកអ្នកអាចផ្ញើពរជ័យ និងចំណងដៃតាមរយៈ ABA / Bakong KHQR ទទួលបានយ៉ាងងាយស្រួល" data-en="Send your warm blessings and wedding gifts directly via ABA / Bakong KHQR">លោកអ្នកអាចផ្ញើពរជ័យ និងចំណងដៃតាមរយៈ ABA / Bakong KHQR ទទួលបានយ៉ាងងាយស្រួល</p>
+        </div>
+        <div class="glass-card text-gray-850 p-4 rounded-xl border-2 border-khmer-gold max-w-xs mx-auto text-center shadow-2xl relative z-10">
+          <div class="flex items-center justify-between border-b border-khmer-gold/30 pb-2 mb-3"><span class="font-moul text-xs text-deep-maroon">ABA BANK</span><span class="bg-red-600 text-white text-[9px] font-bold px-2 py-0.5 rounded">KHQR</span></div>
+          <div onclick="openQRModal()" class="qr-glow cursor-pointer group relative bg-white p-2.5 rounded-lg border border-gray-200 inline-block mb-3 transition-transform transform hover:scale-105">
+            <img src="QR.jpg" alt="ABA KHQR Code" class="w-44 h-44 mx-auto object-contain">
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center text-white text-xs font-bold gap-1"><i class="fa-solid fa-expand"></i><span data-km="ពង្រីក" data-en="Enlarge">ពង្រីក</span></div>
+          </div>
+          <div class="text-center space-y-0.5 mb-3">
+            <p class="text-[10px] text-gray-500 uppercase tracking-wider">Account Name</p>
+            <p class="font-moul text-xs text-deep-maroon">SAN BUNSEANG / THEN BUNNET</p>
+            <p class="text-[11px] font-bold text-gray-750"><span class="acc-display"></span> (USD)</p>
+          </div>
+          <button onclick="copyAccNumber()" class="w-full bg-deep-maroon hover:bg-dark-maroon text-khmer-gold border border-khmer-gold text-xs font-bold py-2 px-3 rounded-lg shadow transition-all flex items-center justify-center gap-2"><i class="fa-regular fa-copy"></i><span data-km="ចម្លងលេខគណនី" data-en="Copy Account Number">ចម្លងលេខគណនី</span></button>
+        </div>
+        <p class="text-[11px] text-center text-khmer-gold-light/90 italic mt-4" data-km="សូមអរគុណយ៉ាងជ្រាលជ្រៅសម្រាប់ទឹកចិត្ត និងពរជ័យដ៏ថ្លៃថ្លា!" data-en="Thank you very much for your blessings and generosity!"><i class="fa-solid fa-dove text-khmer-gold mr-1"></i>សូមអរគុណយ៉ាងជ្រាលជ្រៅសម្រាប់ទឹកចិត្ត និងពរជ័យដ៏ថ្លៃថ្លា!<i class="fa-solid fa-dove text-khmer-gold ml-1 scale-x-[-1] inline-block"></i></p>
+      </div>
+    </section>
+
+
+
 
     <footer class="text-center pt-6 border-t border-khmer-gold/40 mt-6 relative">
       <div class="absolute top-2 left-6 text-khmer-gold decor-flower"><i class="fa-solid fa-spa"></i></div>
