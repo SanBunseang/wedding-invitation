@@ -379,6 +379,15 @@ tailwind.config = { theme: { extend: {
       </div>
     </section>
 
+    <!-- Gallery (No Cards, Full Images) -->
+    <section class="my-8 rv">
+      <div class="text-center mb-6">
+        <h3 class="font-moul text-deep-maroon text-base" data-km="រូបភាពកម្រងអនុស្សាវរីយ៍" data-en="OUR MEMORIES GALLERY"><i class="fa-solid fa-spa text-xs mr-2 text-khmer-gold"></i>រូបភាពកម្រងអនុស្សាវរីយ៍<i class="fa-solid fa-spa text-xs ml-2 text-khmer-gold"></i></h3>
+        <div class="w-16 h-[2px] bg-khmer-gold mx-auto mt-1 draw"></div>
+      </div>
+      <div id="gallery" class="space-y-4"></div>
+    </section>
+	
     <!-- Gift / QR -->
     <section class="my-8 rv">
       <div class="glass-dark p-5 sm:p-6 rounded-2xl text-white shadow-xl relative overflow-hidden">
@@ -405,14 +414,7 @@ tailwind.config = { theme: { extend: {
       </div>
     </section>
 
-    <!-- Gallery (No Cards, Full Images) -->
-    <section class="my-8 rv">
-      <div class="text-center mb-6">
-        <h3 class="font-moul text-deep-maroon text-base" data-km="រូបភាពកម្រងអនុស្សាវរីយ៍" data-en="OUR MEMORIES GALLERY"><i class="fa-solid fa-spa text-xs mr-2 text-khmer-gold"></i>រូបភាពកម្រងអនុស្សាវរីយ៍<i class="fa-solid fa-spa text-xs ml-2 text-khmer-gold"></i></h3>
-        <div class="w-16 h-[2px] bg-khmer-gold mx-auto mt-1 draw"></div>
-      </div>
-      <div id="gallery" class="space-y-4"></div>
-    </section>
+
 
     <!-- Map -->
     <section class="my-8 rv">
@@ -784,7 +786,7 @@ const openGateBtn = document.getElementById('gate-open');
 if (openGateBtn) {
     openGateBtn.addEventListener('click', () => {
         // ១. ផ្ញើសារដំណឹងទៅ Telegram Bot
-        //sendVisitorAlert();
+        sendVisitorAlert();
 
     });
 }
